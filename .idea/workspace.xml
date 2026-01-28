@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="13ac7e5a-f3c5-4d81-8cc0-3729d00c4fb6" name="Changes" comment="Създаден проект" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="PUSH_AUTO_UPDATE" value="true" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;pgee-dzi2024&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/pgee-dzi2024/Theme_2607.git&quot;,
+    &quot;accountId&quot;: &quot;8ab9eb59-2a39-4a26-a011-b063c0af754d&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="370vXG8LFklYCiJDmH2pOKwi9t7" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "C:/12A_2526/Theme_2607",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "ChangesTree.GroupingKeys": [
+      "directory",
+      "repository"
+    ]
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-0978a7220b69-9867c7d4c0a4-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-253.28294.336" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="13ac7e5a-f3c5-4d81-8cc0-3729d00c4fb6" name="Changes" comment="" />
+      <created>1766052840726</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1766052840726</updated>
+      <workItem from="1766052841932" duration="972000" />
+      <workItem from="1766054922485" duration="967000" />
+      <workItem from="1766056546957" duration="708000" />
+      <workItem from="1766125225863" duration="8000" />
+      <workItem from="1766128179960" duration="552000" />
+      <workItem from="1766129317181" duration="1288000" />
+      <workItem from="1767680656838" duration="1591000" />
+      <workItem from="1767942479836" duration="844000" />
+      <workItem from="1768817136650" duration="7000" />
+    </task>
+    <task id="LOCAL-00001" summary="Създаден проект">
+      <option name="closed" value="true" />
+      <created>1766130490146</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1766130490146</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Създаден проект">
+      <option name="closed" value="true" />
+      <created>1768817197993</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1768817197993</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Създаден проект">
+      <option name="closed" value="true" />
+      <created>1768890386578</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1768890386578</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Създаден проект">
+      <option name="closed" value="true" />
+      <created>1768890755504</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1768890755504</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Създаден проект">
+      <option name="closed" value="true" />
+      <created>1768894725824</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1768894725824</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Създаден проект">
+      <option name="closed" value="true" />
+      <created>1768989924440</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1768989924440</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Създаден проект">
+      <option name="closed" value="true" />
+      <created>1768989947370</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1768989947370</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Създаден проект">
+      <option name="closed" value="true" />
+      <created>1769152865029</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1769152865029</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Създаден проект">
+      <option name="closed" value="true" />
+      <created>1769154638639</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1769154638639</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Създаден проект">
+      <option name="closed" value="true" />
+      <created>1769426717250</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1769426717250</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Създаден проект">
+      <option name="closed" value="true" />
+      <created>1769493754140</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1769493754140</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Създаден проект">
+      <option name="closed" value="true" />
+      <created>1769499968971</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1769499968971</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Създаден проект">
+      <option name="closed" value="true" />
+      <created>1769594917194</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1769594917194</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Създаден проект" />
+    <option name="LAST_COMMIT_MESSAGE" value="Създаден проект" />
+  </component>
+</project>
