@@ -4,16 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13ac7e5a-f3c5-4d81-8cc0-3729d00c4fb6" name="Changes" comment="шаблони">
+    <list default="true" id="13ac7e5a-f3c5-4d81-8cc0-3729d00c4fb6" name="Changes" comment="Чиста инсталация на Django">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DP/DP/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/DP/DP/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practical_app/db.sqlite3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/practical_app/manage.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/practical_app/project/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/practical_app/project/asgi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/practical_app/project/settings.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/practical_app/project/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/DP/main/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practical_app/project/wsgi.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,6 +64,11 @@
     ]
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\12A_2526\Theme_2607\DP\main" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -224,7 +221,15 @@
       <option name="project" value="LOCAL" />
       <updated>1770189083181</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Чиста инсталация на Django">
+      <option name="closed" value="true" />
+      <created>1770196513781</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1770196513781</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -233,6 +238,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Създаден проект" />
     <MESSAGE value="шаблони" />
-    <option name="LAST_COMMIT_MESSAGE" value="шаблони" />
+    <MESSAGE value="Чиста инсталация на Django" />
+    <option name="LAST_COMMIT_MESSAGE" value="Чиста инсталация на Django" />
   </component>
 </project>
