@@ -6,6 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="13ac7e5a-f3c5-4d81-8cc0-3729d00c4fb6" name="Changes" comment="Чиста инсталация на Django">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DP/DP/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/DP/DP/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/работна/Задание тема 07.docx" beforeDir="false" afterPath="$PROJECT_DIR$/DR/Задание тема 07.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/работна/ПЛАН НА ТЕОРЕТИЧНАТА ЧАСТ.docx" beforeDir="false" afterPath="$PROJECT_DIR$/DR/ПЛАН НА ТЕОРЕТИЧНАТА ЧАСТ.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/работна/Титулна страница.docx" beforeDir="false" afterPath="$PROJECT_DIR$/work/Титулна страница.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/работна/бележки.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/работна/проект за теми ПП.docx" beforeDir="false" afterPath="$PROJECT_DIR$/work/проект за теми ПП.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/работна/теми ПП.docx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,36 +44,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "C:/12A_2526/Theme_2607/DP/main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/12A_2526/Theme_2607/DP/main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "ChangesTree.GroupingKeys": [
-      "directory",
-      "repository"
+  &quot;keyToStringList&quot;: {
+    &quot;ChangesTree.GroupingKeys&quot;: [
+      &quot;directory&quot;,
+      &quot;repository&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\12A_2526\Theme_2607\DP\main" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\12A_2526\Theme_2607\DR" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -229,7 +239,15 @@
       <option name="project" value="LOCAL" />
       <updated>1770196513781</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Чиста инсталация на Django">
+      <option name="closed" value="true" />
+      <created>1770197856770</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1770197856770</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
