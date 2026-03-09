@@ -365,8 +365,16 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800"><b>Панел за управление<b/></h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i>Прикачи файл</a>
+                       <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <label class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        <i class="fas fa-upload fa-sm text-white-50"></i>
+        Прикачи файл
+        <input type="file" name="datafile" accept=".csv,.xlsx" hidden>
+    </label>
+
+</form>
                     </div>
 
                     <!-- Content Row -->
