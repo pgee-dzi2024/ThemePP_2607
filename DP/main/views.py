@@ -23,7 +23,7 @@ def index(request):
         values = df.iloc[:, 1].tolist()
 
         # таблица за показване в страницата
-        data = df.to_html(classes="table table-bordered table-striped")
+        data = df.to_html(classes="table table-bordered table-hover table-striped")
 
     context = {
         "labels": labels,

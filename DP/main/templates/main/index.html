@@ -483,7 +483,7 @@
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
-                                    <div class="chart-area">
+                                    <div class="chart-area" style="height:400px;">
                                         <canvas id="myAreaChart"></canvas>
                                     </div>
                                 </div>
@@ -496,7 +496,7 @@
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Източници на приходи</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Разпределение на приходите по месеци</h6>
                                     <div class="dropdown no-arrow">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -539,13 +539,28 @@
 
 
                             <!-- Project Card Example -->
-                            <div class="card mt-4">
-    <div class="card-header">
-        <h5>Преглед на данните</h5>
+                      <div class="col-12 mt-4">
+
+    <div class="card shadow mb-4">
+
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">
+                Преглед на данните
+            </h6>
+        </div>
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+
+                {{ data|safe }}
+
+            </div>
+
+        </div>
+
     </div>
-    <div class="card-body">
-        {{ data|safe }}
-    </div>
+
 </div>
                                 <div class="card-body">
                                     <h4 class="small font-weight-bold">Server Migration <span
@@ -731,28 +746,74 @@
     <!-- Page level custom scripts -->
    <script>
 
+var labels = {{ labels|safe }};
+var values = {{ values|safe }};
+
 if(labels.length > 0){
 
-// ЛИНЕЙНА ДИАГРАМА
+// Линейна диаграма
 
-var ctx = document.getElementById("myAreaChart");
+var ctx = document.getElementById("myAreaChart").getContext("2d");
 
 new Chart(ctx, {
-    type: 'line',
+
+    type: "line",
+
     data: {
         labels: labels,
+
         datasets: [{
-            label: "Стойности",
+            label: "Приходи",
             data: values,
-            backgroundColor: "rgba(78,115,223,0.2)",
-            borderColor: "rgba(78,115,223,1)",
-            borderWidth: 2
+
+            borderColor: "#4e73df",
+            backgroundColor: "rgba(78,115,223,0.15)",
+
+            borderWidth: 3,
+
+            tension: 0.4,      // прави линията гладка
+            fill: true,        // оцветява под линията
+
+            pointRadius: 5,
+            pointBackgroundColor: "#4e73df",
+            pointBorderColor: "#ffffff",
+            pointHoverRadius: 7
         }]
+    },
+
+    options: {
+
+        responsive: true,
+        maintainAspectRatio: false,
+
+        plugins: {
+            legend: {
+                display: true
+            }
+        },
+
+        scales: {
+
+            y: {
+                beginAtZero: true,
+                grid: {
+                    color: "#eaecf4"
+                }
+            },
+
+            x: {
+                grid: {
+                    display: false
+                }
+            }
+
+        }
+
     }
+
 });
 
-
-// КРЪГОВА ДИАГРАМА
+// Кръгова диаграма
 
 var ctx2 = document.getElementById("myPieChart");
 
@@ -763,11 +824,12 @@ new Chart(ctx2, {
         datasets: [{
             data: values,
             backgroundColor: [
-                '#4e73df',
-                '#1cc88a',
-                '#36b9cc',
-                '#f6c23e',
-                '#e74a3b'
+                "#4e73df",
+                "#1cc88a",
+                "#36b9cc",
+                "#f6c23e",
+                "#e74a3b",
+                "#858796"
             ]
         }]
     }

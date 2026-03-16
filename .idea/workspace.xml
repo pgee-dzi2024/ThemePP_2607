@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13ac7e5a-f3c5-4d81-8cc0-3729d00c4fb6" name="Changes" comment="Промени по дизайна">
+    <list default="true" id="13ac7e5a-f3c5-4d81-8cc0-3729d00c4fb6" name="Changes" comment="Работещ бутон">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DP/main/templates/main/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/DP/main/templates/main/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DP/main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/DP/main/views.py" afterDir="false" />
@@ -375,7 +375,15 @@
       <option name="project" value="LOCAL" />
       <updated>1773394612169</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Работещ бутон">
+      <option name="closed" value="true" />
+      <created>1773647394781</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1773647394781</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -399,7 +407,8 @@
     <MESSAGE value="Готова база данни" />
     <MESSAGE value="Малки промени по дизайна" />
     <MESSAGE value="Промени по дизайна" />
-    <option name="LAST_COMMIT_MESSAGE" value="Промени по дизайна" />
+    <MESSAGE value="Работещ бутон" />
+    <option name="LAST_COMMIT_MESSAGE" value="Работещ бутон" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Theme_07_Magi$python__m_pip_install__r_requirements_txt.coverage" NAME="python -m pip install -r requirements.txt Coverage Results" MODIFIED="1770684594945" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
