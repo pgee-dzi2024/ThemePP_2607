@@ -359,10 +359,10 @@
     {% csrf_token %}
 
     <label class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-        <i class="fas fa-upload fa-sm text-white-50"></i>
-        Прикачи файл
-        <input type="file" name="datafile" accept=".csv,.xlsx" hidden>
-    </label>
+    <i class="fas fa-upload fa-sm text-white-50"></i>
+    Прикачи файл
+    <input type="file" name="datafile" accept=".csv,.xlsx" hidden onchange="this.form.submit()">
+</label>
 
 </form>
                     </div>
@@ -729,9 +729,59 @@
     <script src="{% static 'vendor/chart.js/Chart.min.js' %}"></script>
 
     <!-- Page level custom scripts -->
-    <script src="{% static 'js/demo/chart-area-demo.js' %}"></script>
-    <script src="{% static 'js/demo/chart-pie-demo.js' %}"></script>
+   <script>
 
+if(labels.length > 0){
+
+// ЛИНЕЙНА ДИАГРАМА
+
+var ctx = document.getElementById("myAreaChart");
+
+new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: labels,
+        datasets: [{
+            label: "Стойности",
+            data: values,
+            backgroundColor: "rgba(78,115,223,0.2)",
+            borderColor: "rgba(78,115,223,1)",
+            borderWidth: 2
+        }]
+    }
+});
+
+
+// КРЪГОВА ДИАГРАМА
+
+var ctx2 = document.getElementById("myPieChart");
+
+new Chart(ctx2, {
+    type: 'pie',
+    data: {
+        labels: labels,
+        datasets: [{
+            data: values,
+            backgroundColor: [
+                '#4e73df',
+                '#1cc88a',
+                '#36b9cc',
+                '#f6c23e',
+                '#e74a3b'
+            ]
+        }]
+    }
+});
+
+}
+
+</script>
+            <script>
+
+        var labels = {{ labels|safe }};
+        var values = {{ values|safe }};
+
+            </script>
 </body>
 
 </html>
