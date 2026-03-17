@@ -9,6 +9,8 @@ def index(request):
     data = ""
     max_month = ""
     max_value = 0
+    total = 0
+    average = 0
 
     if request.method == "POST" and request.FILES.get("datafile"):
 
@@ -20,17 +22,39 @@ def index(request):
         elif file.name.endswith(".xlsx"):
             df = pd.read_excel(file)
 
-        # взимаме първите две колони
-        labels = df.iloc[:, 0].tolist()
-        values = df.iloc[:, 1].tolist()
+        # 1. намираме числова колона автоматично
+        numeric_columns = df.select_dtypes(include=['number']).columns
 
-        # НАЙ-СИЛЕН МЕСЕЦ
-        max_index = df.iloc[:, 1].idxmax()
-        max_month = df.iloc[max_index, 0]
-        max_value = df.iloc[max_index, 1]
+        if len(numeric_columns) > 0:
+            values = df[numeric_columns[0]].fillna(0).tolist()
+        else:
+            values = []
+
+        #  2. намираме текстова колона (за labels)
+        text_columns = df.select_dtypes(include=['object']).columns
+
+        if len(text_columns) > 0:
+            labels = df[text_columns[0]].fillna("").tolist()
+        else:
+            labels = [str(i) for i in range(len(values))]
+
+        #  3. защитa (винаги числа)
+        values = [float(v) for v in values]
+
+        #  4. изчисления
+        if values:
+            total = sum(values)
+            average = round(total / len(values), 2)
+
+            max_index = values.index(max(values))
+            max_month = labels[max_index] if labels else ""
+            max_value = values[max_index]
 
         # таблица
-        data = df.to_html(classes="table table-bordered table-hover table-striped")
+        data = df.to_html(
+            index=False,
+            classes="table table-bordered table-striped text-center w-100"
+        )
 
     context = {
         "labels": labels,
