@@ -9,6 +9,8 @@ def index(request):
     data = ""
     max_month = ""
     max_value = 0
+    min_value = 0
+    variation = 0
     total = 0
     average = 0
 
@@ -22,7 +24,7 @@ def index(request):
         elif file.name.endswith(".xlsx"):
             df = pd.read_excel(file)
 
-        # 1. намираме числова колона автоматично
+        # числова колона
         numeric_columns = df.select_dtypes(include=['number']).columns
 
         if len(numeric_columns) > 0:
@@ -30,7 +32,7 @@ def index(request):
         else:
             values = []
 
-        #  2. намираме текстова колона (за labels)
+        # текстова колона
         text_columns = df.select_dtypes(include=['object']).columns
 
         if len(text_columns) > 0:
@@ -38,10 +40,9 @@ def index(request):
         else:
             labels = [str(i) for i in range(len(values))]
 
-        #  3. защитa (винаги числа)
+        # защита
         values = [float(v) for v in values]
 
-        #  4. изчисления
         if values:
             total = sum(values)
             average = round(total / len(values), 2)
@@ -49,6 +50,9 @@ def index(request):
             max_index = values.index(max(values))
             max_month = labels[max_index] if labels else ""
             max_value = values[max_index]
+
+            min_value = min(values)
+            variation = max_value - min_value
 
         # таблица
         data = df.to_html(
@@ -62,6 +66,8 @@ def index(request):
         "data": data,
         "max_month": max_month,
         "max_value": max_value,
+        "min_value": min_value,
+        "variation": variation,
         "total": total,
         "average": average,
     }
