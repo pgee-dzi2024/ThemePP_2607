@@ -1,277 +1,129 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="bg">
+{% extends "main/base.html" %}
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CSV Manager</title>
+{% block title %}CSV Manager{% endblock %}
 
-    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet">
-    <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
-</head>
+{% block content %}
 
-<body id="page-top">
-
-<div id="wrapper">
-
-<!-- ================= SIDEBAR ================= -->
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-    <a class="sidebar-brand d-flex align-items-center justify-content-center">
-        <i class="fas fa-file-csv"></i>
-        <div class="mx-3"><b>CSV Manager</b></div>
-    </a>
-
-    <hr class="sidebar-divider">
-
-    <li class="nav-item active">
-        <a class="nav-link">
-            <i class="fas fa-tachometer-alt"></i>
-            <span>Табло за управление</span>
-        </a>
-    </li>
-
-    <hr class="sidebar-divider">
-
-    <li class="nav-item">
-        <a class="nav-link" href="{% url 'about' %}">
-            <i class="fas fa-info-circle"></i>
-            <span>Информация</span>
-        </a>
-    </li>
-
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities">
-            <i class="fas fa-wrench"></i>
-            <span>Услуги</span>
-        </a>
-        <div id="collapseUtilities" class="collapse" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="#">Опция 1</a>
-                <a class="collapse-item" href="#">Опция 2</a>
-            </div>
-        </div>
-    </li>
-
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages">
-            <i class="fas fa-folder"></i>
-            <span>Страници</span>
-        </a>
-        <div id="collapsePages" class="collapse" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item">Login</a>
-                <a class="collapse-item">Register</a>
-            </div>
-        </div>
-    </li>
-
-    <li class="nav-item">
-        <a class="nav-link">
-            <i class="fas fa-chart-area"></i>
-            <span>Диаграми</span>
-        </a>
-    </li>
-
-    <li class="nav-item">
-        <a class="nav-link">
-            <i class="fas fa-table"></i>
-            <span>Таблици</span>
-        </a>
-    </li>
-
-</ul>
-
-<!-- ================= CONTENT ================= -->
-<div id="content-wrapper" class="d-flex flex-column">
-<div id="content">
-
-<!-- ================= TOPBAR ================= -->
 <nav class="navbar navbar-light bg-white shadow mb-4">
     <span class="navbar-brand">Панел за управление</span>
 
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <label class="btn btn-primary btn-sm">
-            Прикачи файл
-            <input type="file" name="datafile" hidden onchange="this.form.submit()">
+
+        <label class="btn btn-primary btn-sm shadow-sm">
+            <i class="fas fa-upload mr-2"></i> Качи файл
+            <input type="file" name="datafile" id="fileInput" hidden>
         </label>
+
+        <div id="fileName" class="small text-muted mt-2"></div>
     </form>
 </nav>
 
 <div class="container-fluid">
 
-<!-- ================= КАРТИ ================= -->
+{% if labels|length == 0 %}
+<div class="alert alert-warning text-center">
+    Няма качени данни
+</div>
+{% endif %}
+
 <div class="row">
 
-    <!-- ВАРИАЦИЯ -->
     <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card shadow h-100 py-2 border-left-dark">
+        <div class="card shadow h-100 py-2 border-left-primary">
             <div class="card-body">
-                <div class="row no-gutters align-items-center">
-
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">
-                            Вариация
-                        </div>
-
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">
-                            {{ variation|floatformat:0 }}
-                        </div>
-
-                        <div class="small text-muted">
-                            {{ min_value|floatformat:0 }} → {{ max_value|floatformat:0 }}
-                        </div>
-                    </div>
-
-                    <div class="col-auto">
-                        <i class="fas fa-chart-line fa-2x text-gray-300"></i>
-                    </div>
-
-                </div>
+                <div class="text-xs font-weight-bold text-primary mb-1">Вариация</div>
+                <div class="h5 font-weight-bold text-gray-800">{{ variation|floatformat:0 }}</div>
+                <div class="small text-muted">{{ min_value|floatformat:0 }} → {{ max_value|floatformat:0 }}</div>
             </div>
         </div>
     </div>
 
-    <!-- СРЕДНО -->
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-primary shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            Средно
-                        </div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">
-                            {{ average }}
-                        </div>
-                    </div>
-
-                    <div class="col-auto">
-                        <i class="fas fa-balance-scale fa-2x text-gray-300"></i>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ОБЩО -->
     <div class="col-xl-3 col-md-6 mb-4">
         <div class="card border-left-success shadow h-100 py-2">
             <div class="card-body">
-                <div class="row no-gutters align-items-center">
-
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            Общо
-                        </div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">
-                            {{ total }}
-                        </div>
-                    </div>
-
-                    <div class="col-auto">
-                        <i class="fas fa-coins fa-2x text-gray-300"></i>
-                    </div>
-
-                </div>
+                <div class="text-xs font-weight-bold text-success mb-1">Средно</div>
+                <div class="h5 font-weight-bold text-gray-800">{{ average }}</div>
             </div>
         </div>
     </div>
 
-    <!-- НАЙ-СИЛЕН -->
     <div class="col-xl-3 col-md-6 mb-4">
         <div class="card border-left-warning shadow h-100 py-2">
             <div class="card-body">
-                <div class="row no-gutters align-items-center">
+                <div class="text-xs font-weight-bold text-warning mb-1">Общо</div>
+                <div class="h5 font-weight-bold text-gray-800">{{ total }}</div>
+            </div>
+        </div>
+    </div>
 
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                            <b>Най-силен месец</b>
-                        </div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">
-                            {{ max_month }}
-                        </div>
-                    </div>
-
-                    <div class="col-auto">
-                        <i class="fas fa-star fa-2x text-gray-300"></i>
-                    </div>
-
-                </div>
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="text-xs font-weight-bold text-primary mb-1">Най-силен месец</div>
+                <div class="h5 font-weight-bold text-gray-800">{{ max_month }}</div>
             </div>
         </div>
     </div>
 
 </div>
 
-
-<!-- ================= ГРАФИКИ ================= -->
 <div class="row">
 
-    <!-- ЛИНЕЙНА -->
-    <div class="col-xl-6 col-lg-6">
-        <div class="card shadow mb-4 h-100">
+    <div class="col-xl-6">
+        <div class="card shadow mb-4">
             <div class="card-header"><b>Преглед на приходите</b></div>
             <div class="card-body">
-                <div style="height:420px;">
-                    <canvas id="myAreaChart"></canvas>
-                </div>
+                <canvas id="myAreaChart" style="height:400px;"></canvas>
             </div>
         </div>
     </div>
 
-    <!-- КРЪГОВА -->
-    <div class="col-xl-6 col-lg-6">
-        <div class="card shadow mb-4 h-100">
+    <div class="col-xl-6">
+        <div class="card shadow mb-4">
             <div class="card-header"><b>Разпределение по месеци</b></div>
-            <div class="card-body text-center">
-
-                <div style="height:420px;">
-                    <canvas id="myPieChart"></canvas>
-                </div>
-
-                {% if max_month %}
-                <div class="mt-3">
-                    <b>Най-силен месец: {{ max_month }} ({{ max_value }} лв.)</b>
-                </div>
-                {% endif %}
-
+            <div class="card-body">
+                <canvas id="myPieChart" style="height:400px;"></canvas>
             </div>
         </div>
     </div>
 
 </div>
 
+<div class="row">
 
-<!-- ================= ТАБЛИЦА ================= -->
+    <div class="col-xl-6">
+        <div class="card shadow mb-4">
+            <div class="card-header"><b>Стълбовидна диаграма</b></div>
+            <div class="card-body">
+                <canvas id="myBarChart" style="height:400px;"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-6">
+        <div class="card shadow mb-4">
+            <div class="card-header"><b>Хистограма</b></div>
+            <div class="card-body">
+                <canvas id="myHistogram" style="height:400px;"></canvas>
+            </div>
+        </div>
+    </div>
+
+</div>
+
 <div class="row mt-4">
-
-    <div class="col-xl-8">
+    <div class="col-12">
         <div class="card shadow mb-4">
             <div class="card-header"><b>Преглед на данните</b></div>
             <div class="card-body">
-                <div class="table-responsive">
-                    {{ data|safe }}
-                </div>
+                {{ data|safe }}
             </div>
         </div>
     </div>
-
 </div>
 
 </div>
-</div>
-</div>
-</div>
-
-<!-- ================= SCRIPTS ================= -->
-<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-<script src="{% static 'vendor/chart.js/Chart.min.js' %}"></script>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
@@ -279,50 +131,106 @@ document.addEventListener("DOMContentLoaded", function () {
     var labels = {{ labels|safe }};
     var values = {{ values|safe }};
 
-    if (labels.length > 0) {
-
-        new Chart(document.getElementById("myAreaChart"), {
-            type: "line",
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: "Приходи",
-                    data: values,
-                    borderColor: "#4e73df",
-                    backgroundColor: "rgba(78,115,223,0.2)",
-                    fill: true,
-                    tension: 0.4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false
-            }
-        });
-
-        new Chart(document.getElementById("myPieChart"), {
-            type: "pie",
-            data: {
-                labels: labels,
-                datasets: [{
-                    data: values,
-                    backgroundColor: [
-                        "#4e73df","#1cc88a","#36b9cc","#f6c23e",
-                        "#e74a3b","#858796","#20c9a6","#fd7e14",
-                        "#6f42c1","#17a2b8","#ffc107","#28a745"
-                    ]
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false
-            }
-        });
-
+    if (!labels || labels.length === 0) {
+        labels = ["Няма данни"];
+        values = [0];
     }
+
+    new Chart(document.getElementById("myAreaChart"), {
+        type: "line",
+        data: {
+            labels: labels,
+            datasets: [{
+                label: "Приходи",
+                data: values,
+                borderColor: "#4e73df",
+                backgroundColor: "rgba(78,115,223,0.2)",
+                fill: true
+            }]
+        },
+        options: { maintainAspectRatio: false }
+    });
+
+    new Chart(document.getElementById("myPieChart"), {
+        type: "doughnut",
+        data: {
+            labels: labels,
+            datasets: [{
+                data: values,
+                backgroundColor: [
+                    "#4e73df","#1cc88a","#36b9cc","#f6c23e","#e74a3b",
+                    "#6f42c1","#17a2b8","#20c997","#6610f2","#fd7e14",
+                    "#28a745","#ffc107","#dc3545","#343a40","#adb5bd"
+                ]
+            }]
+        },
+        options: { maintainAspectRatio: false }
+    });
+
+    new Chart(document.getElementById("myBarChart"), {
+        type: "bar",
+        data: {
+            labels: labels,
+            datasets: [{
+                data: values,
+                backgroundColor: "#4e73df"
+            }]
+        },
+        options: { maintainAspectRatio: false }
+    });
+
+    function createHistogram(data, bins = 5) {
+        const min = Math.min(...data);
+        const max = Math.max(...data);
+        const size = (max - min) / bins;
+
+        let hist = new Array(bins).fill(0);
+        let labelsHist = [];
+
+        for (let i = 0; i < bins; i++) {
+            let start = min + i * size;
+            let end = start + size;
+            labelsHist.push(start.toFixed(0) + "-" + end.toFixed(0));
+        }
+
+        data.forEach(v => {
+            let i = Math.min(Math.floor((v - min) / size), bins - 1);
+            hist[i]++;
+        });
+
+        return { hist, labelsHist };
+    }
+
+    const h = createHistogram(values, 6);
+
+    new Chart(document.getElementById("myHistogram"), {
+        type: "bar",
+        data: {
+            labels: h.labelsHist,
+            datasets: [{
+                data: h.hist,
+                backgroundColor: "#1cc88a"
+            }]
+        },
+        options: { maintainAspectRatio: false }
+    });
+
+    const fileInput = document.getElementById("fileInput");
+    const fileNameDiv = document.getElementById("fileName");
+
+    const saved = localStorage.getItem("uploadedFileName");
+    if (saved) fileNameDiv.textContent = "Избран файл: " + saved;
+
+    fileInput.addEventListener("change", function () {
+        if (this.files.length > 0) {
+            const name = this.files[0].name;
+            localStorage.setItem("uploadedFileName", name);
+            fileNameDiv.textContent = "Избран файл: " + name;
+            this.form.submit();
+        }
+    });
 
 });
 </script>
 
-</body>
-</html>
+{% endblock %}

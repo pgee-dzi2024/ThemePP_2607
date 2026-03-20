@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}CSV Manager{% endblock %}</title>
+
+    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
+</head>
+
+<body id="page-top">
+
+<div id="wrapper">
+
+<!-- SIDEBAR -->
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion">
+
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+        <i class="fas fa-file-csv"></i>
+        <div class="mx-3"><b>CSV Manager</b></div>
+    </a>
+
+    <hr class="sidebar-divider">
+
+    <li class="nav-item">
+        <a class="nav-link" href="/">
+            <i class="fas fa-chart-line"></i>
+            <span>Табло за управление</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'about' %}">
+            <i class="fas fa-info-circle"></i>
+            <span>Информация</span>
+        </a>
+    </li>
+
+</ul>
+
+<!-- CONTENT -->
+<div id="content-wrapper" class="d-flex flex-column">
+<div id="content">
+
+<!-- TOPBAR -->
+<nav class="navbar navbar-light bg-white shadow mb-4">
+    <span class="navbar-brand">Информация</span>
+</nav>
+
+<div class="container-fluid">
+
+{% block content %}
+{% endblock %}
+
+</div>
+</div>
+</div>
+</div>
+
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'vendor/chart.js/Chart.min.js' %}"></script>
+
+</body>
+</html>

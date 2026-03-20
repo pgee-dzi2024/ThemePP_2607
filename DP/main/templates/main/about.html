@@ -1,134 +1,138 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "main/base.html" %}
+
+{% block title %}Информация{% endblock %}
+
+{% block content %}
+
 <div class="container-fluid">
 
-<h1 class="h3 mb-4 text-gray-800">Информация за системата</h1>
-
 <div class="row">
 
-<!-- Описание -->
-<div class="col-lg-6">
+    <div class="col-lg-10 mx-auto">
 
-<div class="card shadow mb-4">
-<div class="card-header py-3">
-<h6 class="m-0 font-weight-bold text-primary">
-<i class="fas fa-info-circle"></i> Описание на системата
-</h6>
+        <!-- ОСНОВНА КАРТА -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h4 class="m-0 font-weight-bold text-primary">
+                    <i class="fas fa-info-circle mr-2"></i>
+                    Информация за проекта
+                </h4>
+            </div>
+
+            <div class="card-body">
+
+                <p>
+                    <b>CSV Manager</b> е модерно уеб приложение, предназначено за бърз и ефективен анализ,
+                    обработка и визуализация на данни от CSV и Excel файлове. То позволява на потребителите
+                    лесно да качват файлове и автоматично да получават структурирана информация,
+                    статистики и интерактивни графики.
+                </p>
+
+                <p>
+                    Приложението използва мощни библиотеки като <b>Pandas</b> за обработка на данни
+                    и <b>Chart.js</b> за визуализация, което го прави подходящо както за начинаещи,
+                    така и за напреднали потребители.
+                </p>
+
+                <ul class="mt-3">
+                    <li>📂 <b>Качване на файлове</b> – поддръжка на CSV и Excel формати с автоматично извличане на данни</li>
+                    <li>📊 <b>Визуализация с графики</b> – линейни, кръгови и стълбовидни диаграми за по-добро разбиране</li>
+                    <li>📈 <b>Анализ на данни</b> – автоматично изчисляване на средно, максимум, минимум и вариация</li>
+                    <li>📋 <b>Табличен преглед</b> – ясно структурирано представяне на данните в табличен вид</li>
+                    <li>⚡ <b>Автоматична обработка</b> – интелигентно разпознаване на числови и текстови колони</li>
+                    <li>🎯 <b>Dashboard</b> – визуално табло с ключови метрики и статистики</li>
+                </ul>
+
+                <hr>
+
+                <p class="text-muted">
+                    Основната цел на CSV Manager е да улесни работата с данни,
+                    като предоставя интуитивен интерфейс и мощни инструменти за анализ,
+                    без необходимост от задълбочени технически познания.
+                </p>
+
+
+            </div>
+        </div>
+
+        <!-- ГРАФИКИ -->
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="card shadow mb-4">
+                    <div class="card-header">Линейна графика</div>
+                    <div class="card-body text-center">
+                        <img src="https://quickchart.io/chart?c={type:'line',data:{labels:['Януари','Февруари','Март'],datasets:[{label:'Data',data:[10,20,15]}]}}" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card shadow mb-4">
+                    <div class="card-header">Кръгова диаграма</div>
+                    <div class="card-body text-center">
+                        <img src="https://quickchart.io/chart?c={type:'doughnut',data:{labels:['A','B','C'],datasets:[{data:[30,50,20]}]}}" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ТЕХНОЛОГИИ -->
+        <div class="card shadow mb-4">
+            <div class="card-header">
+                <h5 class="font-weight-bold">Използвани технологии</h5>
+            </div>
+
+            <div class="card-body text-center">
+
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" width="60">
+                        <p>Django</p>
+                    </div>
+
+                    <div class="col-md-3">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="60">
+                        <p>Pandas</p>
+                    </div>
+
+                    <div class="col-md-3">
+                        <img src="https://www.chartjs.org/img/chartjs-logo.svg" width="60">
+                        <p>Chart.js</p>
+                    </div>
+
+                    <div class="col-md-3">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" width="60">
+                        <p>Bootstrap</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- BONUS СЕКЦИЯ -->
+        <div class="card shadow mb-4">
+            <div class="card-body text-center">
+
+                <h5>Какво ще научите?</h5>
+
+                <ul class="text-left d-inline-block mt-3">
+                    <li>📊 Работа с реални данни</li>
+                    <li>🐍 Pandas анализ</li>
+                    <li>📈 Визуализация с Chart.js</li>
+                    <li>🌐 Django уеб разработка</li>
+                </ul>
+
+            </div>
+        </div>
+
+    </div>
+
 </div>
 
-<div class="card-body">
-
-<p>
-<b>CSV Manager</b> е уеб приложение за анализ и визуализация на таблични данни.
-Системата позволява на потребителите да качват файлове във формат CSV или Excel,
-след което автоматично извършва обработка на информацията и представя резултатите
-чрез графики и таблици.
-</p>
-
-<p>
-Основната цел на приложението е да улесни анализа на големи набори от данни чрез
-интуитивен интерфейс и автоматизирана обработка на информацията.
-</p>
-
-</div>
 </div>
 
-</div>
-
-<!-- Технологии -->
-<div class="col-lg-6">
-
-<div class="card shadow mb-4">
-<div class="card-header py-3">
-<h6 class="m-0 font-weight-bold text-success">
-<i class="fas fa-code"></i> Използвани технологии
-</h6>
-</div>
-
-<div class="card-body">
-
-<ul>
-<li><b>Python</b> – основен програмен език</li>
-<li><b>Django</b> – framework за уеб разработка</li>
-<li><b>Pandas</b> – обработка и анализ на данни</li>
-<li><b>Chart.js</b> – визуализация на графики</li>
-<li><b>Bootstrap</b> – дизайн на интерфейса</li>
-</ul>
-
-</div>
-</div>
-
-</div>
-
-</div>
-
-
-<!-- Функционалности -->
-<div class="row">
-
-<div class="col-lg-4">
-
-<div class="card border-left-primary shadow h-100 py-2">
-<div class="card-body">
-
-<i class="fas fa-upload fa-2x text-primary"></i>
-
-<h5 class="mt-2">Качване на файлове</h5>
-
-<p>
-Поддръжка на CSV и Excel файлове за анализ на данни.
-</p>
-
-</div>
-</div>
-
-</div>
-
-
-<div class="col-lg-4">
-
-<div class="card border-left-success shadow h-100 py-2">
-<div class="card-body">
-
-<i class="fas fa-chart-line fa-2x text-success"></i>
-
-<h5 class="mt-2">Генериране на графики</h5>
-
-<p>
-Автоматично създаване на линейни и кръгови диаграми.
-</p>
-
-</div>
-</div>
-
-</div>
-
-
-<div class="col-lg-4">
-
-<div class="card border-left-info shadow h-100 py-2">
-<div class="card-body">
-
-<i class="fas fa-table fa-2x text-info"></i>
-
-<h5 class="mt-2">Преглед на данните</h5>
-
-<p>
-Таблично представяне на информацията от качения файл.
-</p>
-
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-</body>
-</html>
+{% endblock %}
