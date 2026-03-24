@@ -1,4 +1,5 @@
 {% extends "main/base.html" %}
+{% load static %}
 
 {% block title %}CSV Manager{% endblock %}
 
@@ -15,7 +16,11 @@
             <input type="file" name="datafile" id="fileInput" hidden>
         </label>
 
-        <div id="fileName" class="small text-muted mt-2"></div>
+        <div id="fileName" class="small text-muted mt-2">
+            {% if uploaded_file_name %}
+                Избран файл: {{ uploaded_file_name }}
+            {% endif %}
+        </div>
     </form>
 </nav>
 
@@ -27,6 +32,7 @@
 </div>
 {% endif %}
 
+<!-- KPI -->
 <div class="row">
 
     <div class="col-xl-3 col-md-6 mb-4">
@@ -42,8 +48,8 @@
     <div class="col-xl-3 col-md-6 mb-4">
         <div class="card border-left-success shadow h-100 py-2">
             <div class="card-body">
-                <div class="text-xs font-weight-bold text-success mb-1">Средно</div>
-                <div class="h5 font-weight-bold text-gray-800">{{ average }}</div>
+                <div class="text-xs font-weight-bold text-success mb-1">Средният доход:</div>
+                <div class="h5 font-weight-bold text-gray-800">{{ average }}€</div>
             </div>
         </div>
     </div>
@@ -51,8 +57,8 @@
     <div class="col-xl-3 col-md-6 mb-4">
         <div class="card border-left-warning shadow h-100 py-2">
             <div class="card-body">
-                <div class="text-xs font-weight-bold text-warning mb-1">Общо</div>
-                <div class="h5 font-weight-bold text-gray-800">{{ total }}</div>
+                <div class="text-xs font-weight-bold text-warning mb-1">Общо:</div>
+                <div class="h5 font-weight-bold text-gray-800">{{ total }} €</div>
             </div>
         </div>
     </div>
@@ -60,7 +66,7 @@
     <div class="col-xl-3 col-md-6 mb-4">
         <div class="card border-left-primary shadow h-100 py-2">
             <div class="card-body">
-                <div class="text-xs font-weight-bold text-primary mb-1">Най-силен месец</div>
+                <div class="text-xs font-weight-bold text-primary mb-1">Най-силен месец:</div>
                 <div class="h5 font-weight-bold text-gray-800">{{ max_month }}</div>
             </div>
         </div>
@@ -68,22 +74,31 @@
 
 </div>
 
+<!-- MATPLOTLIB  -->
 <div class="row">
 
     <div class="col-xl-6">
         <div class="card shadow mb-4">
-            <div class="card-header"><b>Преглед на приходите</b></div>
-            <div class="card-body">
-                <canvas id="myAreaChart" style="height:400px;"></canvas>
+
+            <div class="card-body text-center bg-light">
+                {% if line_chart %}
+                    <img src="data:image/png;base64,{{ line_chart }}" class="img-fluid">
+                {% else %}
+                    <p class="text-muted">Няма данни</p>
+                {% endif %}
             </div>
         </div>
     </div>
 
     <div class="col-xl-6">
         <div class="card shadow mb-4">
-            <div class="card-header"><b>Разпределение по месеци</b></div>
-            <div class="card-body">
-                <canvas id="myPieChart" style="height:400px;"></canvas>
+
+            <div class="card-body text-center bg-light">
+                {% if pie_chart %}
+                    <img src="data:image/png;base64,{{ pie_chart }}" class="img-fluid">
+                {% else %}
+                    <p class="text-muted">Няма данни</p>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -94,24 +109,33 @@
 
     <div class="col-xl-6">
         <div class="card shadow mb-4">
-            <div class="card-header"><b>Стълбовидна диаграма</b></div>
-            <div class="card-body">
-                <canvas id="myBarChart" style="height:400px;"></canvas>
+
+            <div class="card-body text-center bg-light">
+                {% if bar_chart %}
+                    <img src="data:image/png;base64,{{ bar_chart }}" class="img-fluid">
+                {% else %}
+                    <p class="text-muted">Няма данни</p>
+                {% endif %}
             </div>
         </div>
     </div>
 
     <div class="col-xl-6">
         <div class="card shadow mb-4">
-            <div class="card-header"><b>Хистограма</b></div>
-            <div class="card-body">
-                <canvas id="myHistogram" style="height:400px;"></canvas>
+
+            <div class="card-body text-center bg-light">
+                {% if histogram_chart %}
+                    <img src="data:image/png;base64,{{ histogram_chart }}" class="img-fluid">
+                {% else %}
+                    <p class="text-muted">Няма данни</p>
+                {% endif %}
             </div>
         </div>
     </div>
 
 </div>
 
+<!-- TABLE -->
 <div class="row mt-4">
     <div class="col-12">
         <div class="card shadow mb-4">
@@ -128,103 +152,12 @@
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
-    var labels = {{ labels|safe }};
-    var values = {{ values|safe }};
-
-    if (!labels || labels.length === 0) {
-        labels = ["Няма данни"];
-        values = [0];
-    }
-
-    new Chart(document.getElementById("myAreaChart"), {
-        type: "line",
-        data: {
-            labels: labels,
-            datasets: [{
-                label: "Приходи",
-                data: values,
-                borderColor: "#4e73df",
-                backgroundColor: "rgba(78,115,223,0.2)",
-                fill: true
-            }]
-        },
-        options: { maintainAspectRatio: false }
-    });
-
-    new Chart(document.getElementById("myPieChart"), {
-        type: "doughnut",
-        data: {
-            labels: labels,
-            datasets: [{
-                data: values,
-                backgroundColor: [
-                    "#4e73df","#1cc88a","#36b9cc","#f6c23e","#e74a3b",
-                    "#6f42c1","#17a2b8","#20c997","#6610f2","#fd7e14",
-                    "#28a745","#ffc107","#dc3545","#343a40","#adb5bd"
-                ]
-            }]
-        },
-        options: { maintainAspectRatio: false }
-    });
-
-    new Chart(document.getElementById("myBarChart"), {
-        type: "bar",
-        data: {
-            labels: labels,
-            datasets: [{
-                data: values,
-                backgroundColor: "#4e73df"
-            }]
-        },
-        options: { maintainAspectRatio: false }
-    });
-
-    function createHistogram(data, bins = 5) {
-        const min = Math.min(...data);
-        const max = Math.max(...data);
-        const size = (max - min) / bins;
-
-        let hist = new Array(bins).fill(0);
-        let labelsHist = [];
-
-        for (let i = 0; i < bins; i++) {
-            let start = min + i * size;
-            let end = start + size;
-            labelsHist.push(start.toFixed(0) + "-" + end.toFixed(0));
-        }
-
-        data.forEach(v => {
-            let i = Math.min(Math.floor((v - min) / size), bins - 1);
-            hist[i]++;
-        });
-
-        return { hist, labelsHist };
-    }
-
-    const h = createHistogram(values, 6);
-
-    new Chart(document.getElementById("myHistogram"), {
-        type: "bar",
-        data: {
-            labels: h.labelsHist,
-            datasets: [{
-                data: h.hist,
-                backgroundColor: "#1cc88a"
-            }]
-        },
-        options: { maintainAspectRatio: false }
-    });
-
     const fileInput = document.getElementById("fileInput");
     const fileNameDiv = document.getElementById("fileName");
-
-    const saved = localStorage.getItem("uploadedFileName");
-    if (saved) fileNameDiv.textContent = "Избран файл: " + saved;
 
     fileInput.addEventListener("change", function () {
         if (this.files.length > 0) {
             const name = this.files[0].name;
-            localStorage.setItem("uploadedFileName", name);
             fileNameDiv.textContent = "Избран файл: " + name;
             this.form.submit();
         }
