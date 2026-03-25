@@ -1,0 +1,55 @@
+{% extends "main/base.html" %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-xl-4 col-lg-5 col-md-6">
+
+        <div class="card shadow mt-5">
+            <div class="card-body">
+
+                <h4 class="text-center mb-4">Регистрация</h4>
+
+                {% if error %}
+                    <div class="alert alert-danger text-center">
+                        {{ error }}
+                    </div>
+                {% endif %}
+
+                <form method="POST">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <input type="text" name="username" class="form-control" placeholder="Потребителско име" required>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" name="password1" class="form-control" placeholder="Парола" required>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" name="password2" class="form-control" placeholder="Повтори парола" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-success btn-block">
+                        Регистрация
+                    </button>
+                </form>
+
+                <hr>
+
+                <div class="text-center">
+                    <a href="{% url 'login' %}">
+                        Вече имаш акаунт? Вход
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

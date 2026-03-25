@@ -6,7 +6,13 @@
 {% block content %}
 
 <nav class="navbar navbar-light bg-white shadow mb-4">
-    <span class="navbar-brand">Панел за управление</span>
+    <span class="navbar-brand"><b>Панел за управление</b></span>
+
+    {% if user.is_authenticated %}
+        <span class="ml-3 text-gray-700">
+            <b>Здравейте, {{ user.username }}</b>
+        </span>
+    {% endif %}
 
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
@@ -38,7 +44,7 @@
     <div class="col-xl-3 col-md-6 mb-4">
         <div class="card shadow h-100 py-2 border-left-primary">
             <div class="card-body">
-                <div class="text-xs font-weight-bold text-primary mb-1">Вариация</div>
+                <div class="text-xs font-weight-bold text-primary mb-1">Вариация:</div>
                 <div class="h5 font-weight-bold text-gray-800">{{ variation|floatformat:0 }}</div>
                 <div class="small text-muted">{{ min_value|floatformat:0 }} → {{ max_value|floatformat:0 }}</div>
             </div>
@@ -49,7 +55,7 @@
         <div class="card border-left-success shadow h-100 py-2">
             <div class="card-body">
                 <div class="text-xs font-weight-bold text-success mb-1">Средният доход:</div>
-                <div class="h5 font-weight-bold text-gray-800">{{ average }}€</div>
+                <div class="h5 font-weight-bold text-gray-800">{{ average }} €</div>
             </div>
         </div>
     </div>

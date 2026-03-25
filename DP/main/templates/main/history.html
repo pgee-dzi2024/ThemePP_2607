@@ -1,0 +1,38 @@
+{% extends "main/base.html" %}
+
+{% block title %}История{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <h3 class="mb-4">История на анализите</h3>
+
+    {% if analyses %}
+        <table class="table table-bordered text-center">
+            <thead>
+                <tr>
+                    <th>Файл</th>
+                    <th>Общо</th>
+                    <th>Средно</th>
+                    <th>Дата</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for a in analyses %}
+                <tr>
+                    <td>{{ a.filename }}</td>
+                    <td>{{ a.total }}</td>
+                    <td>{{ a.average }}</td>
+                    <td>{{ a.created_at|date:"d.m.Y H:i" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Няма анализи</p>
+    {% endif %}
+
+</div>
+
+{% endblock %}

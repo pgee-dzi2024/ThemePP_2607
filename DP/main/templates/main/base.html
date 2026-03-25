@@ -7,7 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}CSV Manager{% endblock %}</title>
 
-    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet">
+    <!-- favicon на таба -->
+    <link rel="icon" href="{% static 'favicon.ico' %}">
+
     <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
 </head>
 
@@ -18,42 +20,67 @@
 <!-- SIDEBAR -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion">
 
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
-        <i class="fas fa-file-csv"></i>
-        <div class="mx-3"><b>CSV Manager</b></div>
-    </a>
+    <!-- LOGO -->
+     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+    <svg width="26" height="26" viewBox="0 0 24 24" style="margin-right:8px;">
+
+        <path fill="white" d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/>
+        <path fill="#e3e6f0" d="M15 2v5h5z"/>
+        <text x="6.5" y="16" font-size="6" fill="#4e73df" font-weight="bold">CSV</text>
+
+    </svg>
+    <div class="mx-2"><b>CSV Manager</b></div>
+</a>
 
     <hr class="sidebar-divider">
 
+    <!-- DASHBOARD -->
     <li class="nav-item">
         <a class="nav-link" href="/">
-            <i class="fas fa-chart-line"></i>
             <span>Табло за управление</span>
         </a>
     </li>
 
+    <!-- ABOUT -->
     <li class="nav-item">
         <a class="nav-link" href="{% url 'about' %}">
-            <i class="fas fa-info-circle"></i>
             <span>Информация</span>
         </a>
     </li>
 
-        <hr class="sidebar-divider">
+    {% if user.is_authenticated %}
 
+    <!-- HISTORY -->
     <li class="nav-item">
-        <a class="nav-link" href="#">
-            <i class="fas fa-sign-in-alt"></i>
+        <a class="nav-link" href="{% url 'history' %}">
+            <span>История на анализите</span>
+        </a>
+    </li>
+
+    <!-- LOGOUT -->
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout' %}">
+            <span>Изход</span>
+        </a>
+    </li>
+
+    {% else %}
+
+    <!-- LOGIN -->
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'login' %}">
             <span>Вход</span>
         </a>
     </li>
 
+    <!-- REGISTER -->
     <li class="nav-item">
-        <a class="nav-link" href="#">
-            <i class="fas fa-user-plus"></i>
+        <a class="nav-link" href="{% url 'register' %}">
             <span>Регистрация</span>
         </a>
     </li>
+
+    {% endif %}
 
 </ul>
 
@@ -61,17 +88,13 @@
 <div id="content-wrapper" class="d-flex flex-column">
 <div id="content">
 
-<!-- TOPBAR -->
-<nav class="navbar navbar-light bg-white shadow mb-4">
-
-</nav>
+<nav class="navbar navbar-light bg-white shadow mb-4"></nav>
 
 <div class="container-fluid">
-
 {% block content %}
 {% endblock %}
-
 </div>
+
 </div>
 </div>
 </div>
