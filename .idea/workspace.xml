@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13ac7e5a-f3c5-4d81-8cc0-3729d00c4fb6" name="Changes" comment="добавен matplotlib">
-      <change afterPath="$PROJECT_DIR$/DP/main/templates/main/history.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DP/main/templates/main/login.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DP/main/templates/main/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DP/DP/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/DP/DP/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DP/main/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/DP/main/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DP/main/templates/main/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/DP/main/templates/main/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DP/main/templates/main/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/DP/main/templates/main/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DP/main/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/DP/main/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DP/main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/DP/main/views.py" afterDir="false" />
-    </list>
+    <list default="true" id="13ac7e5a-f3c5-4d81-8cc0-3729d00c4fb6" name="Changes" comment="Готов" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -454,7 +443,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774349432769</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="Готов">
+      <option name="closed" value="true" />
+      <created>1774430697339</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1774430697339</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -482,7 +479,8 @@
     <MESSAGE value="По-добра функционалност" />
     <MESSAGE value="Нова страница" />
     <MESSAGE value="добавен matplotlib" />
-    <option name="LAST_COMMIT_MESSAGE" value="добавен matplotlib" />
+    <MESSAGE value="Готов" />
+    <option name="LAST_COMMIT_MESSAGE" value="Готов" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Theme_07_Magi$python__m_pip_install__r_requirements_txt.coverage" NAME="python -m pip install -r requirements.txt Coverage Results" MODIFIED="1770684594945" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
