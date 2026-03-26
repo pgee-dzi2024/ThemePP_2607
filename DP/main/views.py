@@ -45,89 +45,123 @@ def index(request):
     bar_chart = None
     histogram_chart = None
 
-    if request.method == "POST" and request.FILES.get("datafile"):
+    df = None  # важно
 
-        file = request.FILES["datafile"]
-        uploaded_file_name = file.name
+    if request.method == "POST":
 
-        try:
-            if file.name.endswith(".csv"):
-                df = pd.read_csv(file)
-            elif file.name.endswith(".xlsx"):
-                df = pd.read_excel(file)
+        file = request.FILES.get("datafile")
+
+        # ✅ ако има файл
+        if file:
+            uploaded_file_name = file.name
+
+            try:
+                if file.name.endswith(".csv"):
+                    df = pd.read_csv(file)
+                elif file.name.endswith(".xlsx"):
+                    df = pd.read_excel(file)
+            except Exception as e:
+                print("ERROR:", e)
+
+        # ✅ ако няма файл → няма df (нормално)
+
+        if df is not None:
+
+            # ФИЛТРИ
+            min_filter = request.POST.get("min_filter")
+            group_by = request.POST.get("group_by")
+
+            numeric_columns = df.select_dtypes(include=['number']).columns
+
+            # ФИЛТРИРАНЕ
+            if min_filter:
+                try:
+                    min_filter = float(min_filter)
+                    if len(numeric_columns) > 0:
+                        df = df[df[numeric_columns[0]] >= min_filter]
+                except:
+                    pass
+
+            # ГРУПИРАНЕ
+            if group_by and group_by in df.columns:
+                if len(numeric_columns) > 0:
+                    df = df.groupby(group_by)[numeric_columns[0]].sum().reset_index()
+
+            # ДАННИ
+            if len(numeric_columns) > 0:
+                values = df[numeric_columns[0]].fillna(0).tolist()
             else:
-                df = None
+                values = []
 
-            if df is not None:
+            text_columns = df.select_dtypes(include=['object']).columns
+            if len(text_columns) > 0:
+                labels = df[text_columns[0]].fillna("").tolist()
+            else:
+                labels = [str(i) for i in range(len(values))]
 
-                numeric_columns = df.select_dtypes(include=['number']).columns
-                values = df[numeric_columns[0]].fillna(0).tolist() if len(numeric_columns) > 0 else []
+            values = [float(v) for v in values]
 
-                text_columns = df.select_dtypes(include=['object']).columns
-                labels = df[text_columns[0]].fillna("").tolist() if len(text_columns) > 0 else [str(i) for i in range(len(values))]
+            # СТАТИСТИКИ
+            if values:
+                total = sum(values)
+                average = round(total / len(values), 2)
 
-                values = [float(v) for v in values]
+                max_index = values.index(max(values))
+                max_month = labels[max_index]
+                max_value = values[max_index]
+                min_value = min(values)
+                variation = max_value - min_value
 
-                if values:
-                    total = sum(values)
-                    average = round(total / len(values), 2)
-
-                    max_index = values.index(max(values))
-                    max_month = labels[max_index]
-                    max_value = values[max_index]
-                    min_value = min(values)
-                    variation = max_value - min_value
-
+                # ИСТОРИЯ (само ако има файл)
+                if file:
                     Analysis.objects.create(
                         user=request.user,
                         filename=file.name,
                         total=total,
                         average=average
                     )
-                    plt.style.use('seaborn-v0_8')
 
-                    # LINE
-                    plt.figure(figsize=(7, 4))
-                    plt.plot(values, marker='o', color='#4e73df')
-                    plt.xticks(range(len(labels)), labels, rotation=45)
-                    plt.title("Приходи")
-                    plt.grid(alpha=0.3)
-                    line_chart = plot_to_base64()
+                plt.style.use('seaborn-v0_8')
 
-                    # PIE
-                    colors = [
-                        "#4e73df","#1cc88a","#36b9cc","#f6c23e","#e74a3b",
-                        "#6f42c1","#17a2b8","#20c997","#6610f2","#fd7e14",
-                        "#28a745","#ffc107"
-                    ]
+                # LINE
+                plt.figure(figsize=(7, 4))
+                plt.plot(values, marker='o', color='#4e73df')
+                plt.xticks(range(len(labels)), labels, rotation=45)
+                plt.title("Приходи")
+                plt.grid(alpha=0.3)
+                line_chart = plot_to_base64()
 
-                    plt.figure(figsize=(6, 6))
-                    plt.pie(values, labels=labels, autopct='%1.1f%%', colors=colors)
-                    plt.title("Разпределение")
-                    pie_chart = plot_to_base64()
+                # PIE
+                colors = [
+                    "#4e73df","#1cc88a","#36b9cc","#f6c23e","#e74a3b",
+                    "#6f42c1","#17a2b8","#20c997","#6610f2","#fd7e14"
+                ]
 
-                    # BAR
-                    plt.figure(figsize=(7, 4))
-                    plt.bar(labels, values, color="#1cc88a")
-                    plt.xticks(rotation=45)
-                    plt.title("Стълбовидна")
-                    plt.grid(axis='y', alpha=0.3)
-                    bar_chart = plot_to_base64()
+                plt.figure(figsize=(6, 6))
+                plt.pie(values, labels=labels, autopct='%1.1f%%', colors=colors)
+                plt.title("Разпределение")
+                pie_chart = plot_to_base64()
 
-                    # HISTOGRAM
-                    plt.figure(figsize=(7, 4))
-                    plt.hist(values, bins=6, color="#36b9cc")
-                    plt.title("Хистограма")
-                    plt.grid(alpha=0.3)
-                    histogram_chart = plot_to_base64()
+                # BAR
+                plt.figure(figsize=(7, 4))
+                plt.bar(labels, values, color="#1cc88a")
+                plt.xticks(rotation=45)
+                plt.title("Стълбовидна")
+                plt.grid(axis='y', alpha=0.3)
+                bar_chart = plot_to_base64()
 
-                data = df.to_html(
-                    index=False,
-                    classes="table table-bordered table-striped text-center w-100"
-                )
+                # HISTOGRAM
+                plt.figure(figsize=(7, 4))
+                plt.hist(values, bins=6, color="#36b9cc")
+                plt.title("Хистограма")
+                plt.grid(alpha=0.3)
+                histogram_chart = plot_to_base64()
 
-        except Exception as e:
-            print("ERROR:", e)
+            # ТАБЛИЦА
+            data = df.to_html(
+                index=False,
+                classes="table table-bordered table-striped text-center w-100"
+            )
 
     context = {
         "labels": labels,
@@ -140,7 +174,6 @@ def index(request):
         "total": total,
         "average": average,
         "uploaded_file_name": uploaded_file_name,
-
         "line_chart": line_chart,
         "pie_chart": pie_chart,
         "bar_chart": bar_chart,
@@ -166,7 +199,7 @@ def user_login(request):
 
         if user:
             login(request, user)
-            return redirect('index')   # ВАЖНО
+            return redirect('index')
         else:
             error = "Грешно име или парола"
 
@@ -194,7 +227,7 @@ def register(request):
         else:
             user = User.objects.create_user(username=username, password=password1)
             login(request, user)
-            return redirect('index')   # ВАЖНО
+            return redirect('index')
 
     return render(request, 'main/register.html', {"error": error})
 
@@ -203,6 +236,7 @@ def register(request):
 def user_logout(request):
     logout(request)
     return redirect('index')
+
 
 @login_required
 def history(request):

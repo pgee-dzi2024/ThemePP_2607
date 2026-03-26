@@ -5,29 +5,27 @@
 
 {% block content %}
 
-<nav class="navbar navbar-light bg-white shadow mb-4">
-    <span class="navbar-brand"><b>Панел за управление</b></span>
+<nav class="navbar navbar-light bg-white shadow mb-4 d-flex justify-content-between">
 
-    {% if user.is_authenticated %}
-        <span class="ml-3 text-gray-700">
-            <b>Здравейте, {{ user.username }}</b>
-        </span>
-    {% endif %}
+    <div>
+        <span class="navbar-brand"><b>Панел за управление</b></span>
 
+        {% if user.is_authenticated %}
+            <span class="ml-3 text-gray-700">
+                <b>Здравейте, {{ user.username }}</b>
+            </span>
+        {% endif %}
+    </div>
+
+    <!-- 🔥 UPLOAD ГОРЕ -->
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-
-        <label class="btn btn-primary btn-sm shadow-sm">
-            <i class="fas fa-upload mr-2"></i> Качи файл
-            <input type="file" name="datafile" id="fileInput" hidden>
+        <label class="btn btn-primary btn-sm shadow-sm mb-0">
+            Качи файл
+            <input type="file" name="datafile" onchange="this.form.submit()" hidden>
         </label>
-
-        <div id="fileName" class="small text-muted mt-2">
-            {% if uploaded_file_name %}
-                Избран файл: {{ uploaded_file_name }}
-            {% endif %}
-        </div>
     </form>
+
 </nav>
 
 <div class="container-fluid">
@@ -40,136 +38,72 @@
 
 <!-- KPI -->
 <div class="row">
-
     <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card shadow h-100 py-2 border-left-primary">
+        <div class="card shadow border-left-primary">
             <div class="card-body">
-                <div class="text-xs font-weight-bold text-primary mb-1">Вариация:</div>
-                <div class="h5 font-weight-bold text-gray-800">{{ variation|floatformat:0 }}</div>
-                <div class="small text-muted">{{ min_value|floatformat:0 }} → {{ max_value|floatformat:0 }}</div>
+                Вариация: {{ variation|floatformat:0 }}
             </div>
         </div>
     </div>
 
     <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-success shadow h-100 py-2">
+        <div class="card shadow border-left-success">
             <div class="card-body">
-                <div class="text-xs font-weight-bold text-success mb-1">Средният доход:</div>
-                <div class="h5 font-weight-bold text-gray-800">{{ average }} €</div>
+                Средно: {{ average }} €
             </div>
         </div>
     </div>
 
     <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-warning shadow h-100 py-2">
+        <div class="card shadow border-left-warning">
             <div class="card-body">
-                <div class="text-xs font-weight-bold text-warning mb-1">Общо:</div>
-                <div class="h5 font-weight-bold text-gray-800">{{ total }} €</div>
+                Общо: {{ total }} €
             </div>
         </div>
     </div>
 
     <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-primary shadow h-100 py-2">
+        <div class="card shadow border-left-info">
             <div class="card-body">
-                <div class="text-xs font-weight-bold text-primary mb-1">Най-силен месец:</div>
-                <div class="h5 font-weight-bold text-gray-800">{{ max_month }}</div>
+                Най-силен месец: {{ max_month }}
             </div>
         </div>
     </div>
-
 </div>
 
-<!-- MATPLOTLIB  -->
+<!-- GRAPHS -->
 <div class="row">
-
-    <div class="col-xl-6">
-        <div class="card shadow mb-4">
-
-            <div class="card-body text-center bg-light">
-                {% if line_chart %}
-                    <img src="data:image/png;base64,{{ line_chart }}" class="img-fluid">
-                {% else %}
-                    <p class="text-muted">Няма данни</p>
-                {% endif %}
-            </div>
-        </div>
+    <div class="col-md-6">
+        {% if line_chart %}
+            <img src="data:image/png;base64,{{ line_chart }}" class="img-fluid">
+        {% endif %}
     </div>
 
-    <div class="col-xl-6">
-        <div class="card shadow mb-4">
-
-            <div class="card-body text-center bg-light">
-                {% if pie_chart %}
-                    <img src="data:image/png;base64,{{ pie_chart }}" class="img-fluid">
-                {% else %}
-                    <p class="text-muted">Няма данни</p>
-                {% endif %}
-            </div>
-        </div>
-    </div>
-
-</div>
-
-<div class="row">
-
-    <div class="col-xl-6">
-        <div class="card shadow mb-4">
-
-            <div class="card-body text-center bg-light">
-                {% if bar_chart %}
-                    <img src="data:image/png;base64,{{ bar_chart }}" class="img-fluid">
-                {% else %}
-                    <p class="text-muted">Няма данни</p>
-                {% endif %}
-            </div>
-        </div>
-    </div>
-
-    <div class="col-xl-6">
-        <div class="card shadow mb-4">
-
-            <div class="card-body text-center bg-light">
-                {% if histogram_chart %}
-                    <img src="data:image/png;base64,{{ histogram_chart }}" class="img-fluid">
-                {% else %}
-                    <p class="text-muted">Няма данни</p>
-                {% endif %}
-            </div>
-        </div>
-    </div>
-
-</div>
-
-<!-- TABLE -->
-<div class="row mt-4">
-    <div class="col-12">
-        <div class="card shadow mb-4">
-            <div class="card-header"><b>Преглед на данните</b></div>
-            <div class="card-body">
-                {{ data|safe }}
-            </div>
-        </div>
+    <div class="col-md-6">
+        {% if pie_chart %}
+            <img src="data:image/png;base64,{{ pie_chart }}" class="img-fluid">
+        {% endif %}
     </div>
 </div>
 
+<div class="row mt-3">
+    <div class="col-md-6">
+        {% if bar_chart %}
+            <img src="data:image/png;base64,{{ bar_chart }}" class="img-fluid">
+        {% endif %}
+    </div>
+
+    <div class="col-md-6">
+        {% if histogram_chart %}
+            <img src="data:image/png;base64,{{ histogram_chart }}" class="img-fluid">
+        {% endif %}
+    </div>
 </div>
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
+<div class="mt-4">
+    {{ data|safe }}
+</div>
 
-    const fileInput = document.getElementById("fileInput");
-    const fileNameDiv = document.getElementById("fileName");
-
-    fileInput.addEventListener("change", function () {
-        if (this.files.length > 0) {
-            const name = this.files[0].name;
-            fileNameDiv.textContent = "Избран файл: " + name;
-            this.form.submit();
-        }
-    });
-
-});
-</script>
+</div>
 
 {% endblock %}

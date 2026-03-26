@@ -7,9 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}CSV Manager{% endblock %}</title>
 
-    <!-- favicon на таба -->
     <link rel="icon" href="{% static 'favicon.ico' %}">
-
     <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
 </head>
 
@@ -21,16 +19,14 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion">
 
     <!-- LOGO -->
-     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
-    <svg width="26" height="26" viewBox="0 0 24 24" style="margin-right:8px;">
-
-        <path fill="white" d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/>
-        <path fill="#e3e6f0" d="M15 2v5h5z"/>
-        <text x="6.5" y="16" font-size="6" fill="#4e73df" font-weight="bold">CSV</text>
-
-    </svg>
-    <div class="mx-2"><b>CSV Manager</b></div>
-</a>
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+        <svg width="26" height="26" viewBox="0 0 24 24" style="margin-right:8px;">
+            <path fill="white" d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/>
+            <path fill="#e3e6f0" d="M15 2v5h5z"/>
+            <text x="6.5" y="16" font-size="6" fill="#4e73df" font-weight="bold">CSV</text>
+        </svg>
+        <div class="mx-2"><b>CSV Manager</b></div>
+    </a>
 
     <hr class="sidebar-divider">
 
@@ -48,7 +44,7 @@
         </a>
     </li>
 
-    {% if user.is_authenticated %}
+{% if user.is_authenticated %}
 
     <!-- HISTORY -->
     <li class="nav-item">
@@ -64,7 +60,39 @@
         </a>
     </li>
 
-    {% else %}
+    <hr class="sidebar-divider">
+
+    <!-- ФИЛТРИ -->
+<li class="nav-item px-3">
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <!-- FILTER -->
+        <select name="min_filter" class="form-control mb-2">
+            <option value="">Филтър</option>
+            <option value="0">Всички</option>
+            <option value="50">≥ 50</option>
+            <option value="100">≥ 100</option>
+            <option value="500">≥ 500</option>
+        </select>
+
+        <!-- GROUP -->
+        <select name="group_by" class="form-control mb-2">
+            <option value="">Групиране</option>
+            <option value="Месец">По месец</option>
+            <option value="Категория">По категория</option>
+        </select>
+
+        <button type="submit" class="btn btn-success btn-sm w-100">
+            Приложи
+        </button>
+
+    </form>
+
+</li>
+
+{% else %}
 
     <!-- LOGIN -->
     <li class="nav-item">
@@ -80,7 +108,7 @@
         </a>
     </li>
 
-    {% endif %}
+{% endif %}
 
 </ul>
 
@@ -101,7 +129,6 @@
 
 <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
 <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-<script src="{% static 'vendor/chart.js/Chart.min.js' %}"></script>
 
 </body>
 </html>
