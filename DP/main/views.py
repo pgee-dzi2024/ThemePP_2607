@@ -1,13 +1,11 @@
 from .models import Analysis
 from django.contrib.auth.decorators import login_required
 import pandas as pd
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 
-# AUTH
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
-# Django + Matplotlib
 import matplotlib
 matplotlib.use('Agg')
 
@@ -18,7 +16,8 @@ import base64
 
 def plot_to_base64():
     buffer = io.BytesIO()
-    plt.savefig(buffer, format='png', bbox_inches='tight')
+    plt.tight_layout()
+    plt.savefig(buffer, format='png')
     buffer.seek(0)
     image = base64.b64encode(buffer.getvalue()).decode()
     buffer.close()
@@ -32,12 +31,14 @@ def index(request):
     labels = []
     values = []
     data = ""
+
     max_month = ""
     max_value = 0
     min_value = 0
     variation = 0
     total = 0
     average = 0
+
     uploaded_file_name = None
 
     line_chart = None
@@ -45,119 +46,106 @@ def index(request):
     bar_chart = None
     histogram_chart = None
 
-    df = None  # важно
+    df = None
+    error_message = None
 
     if request.method == "POST":
 
         file = request.FILES.get("datafile")
 
-        # ✅ ако има файл
+        # 📌 КАЧВАНЕ
         if file:
             uploaded_file_name = file.name
 
-            try:
-                if file.name.endswith(".csv"):
-                    df = pd.read_csv(file)
-                elif file.name.endswith(".xlsx"):
-                    df = pd.read_excel(file)
-            except Exception as e:
-                print("ERROR:", e)
+            if file.name.endswith(".csv"):
+                df = pd.read_csv(file)
+            elif file.name.endswith(".xlsx"):
+                df = pd.read_excel(file)
 
-        # ✅ ако няма файл → няма df (нормално)
+            request.session['data'] = df.to_json()
+            request.session['filename'] = file.name
+
+        else:
+            data_json = request.session.get('data')
+
+            if data_json:
+                df = pd.read_json(data_json)
+                uploaded_file_name = request.session.get('filename')
+
 
         if df is not None:
 
-            # ФИЛТРИ
-            min_filter = request.POST.get("min_filter")
-            group_by = request.POST.get("group_by")
-
             numeric_columns = df.select_dtypes(include=['number']).columns
+            text_columns = df.select_dtypes(include=['object']).columns
 
-            # ФИЛТРИРАНЕ
-            if min_filter:
+            label_col = text_columns[0] if len(text_columns) > 0 else None
+            value_col = numeric_columns[0] if len(numeric_columns) > 0 else None
+
+
+            # ✅ ФИЛТЪР
+            min_filter = request.POST.get("min_filter")
+
+            if min_filter and value_col:
                 try:
-                    min_filter = float(min_filter)
-                    if len(numeric_columns) > 0:
-                        df = df[df[numeric_columns[0]] >= min_filter]
+                    number = int(min_filter.replace("≥", "").strip())
+                    df = df[df[value_col] >= number]
                 except:
                     pass
 
-            # ГРУПИРАНЕ
-            if group_by and group_by in df.columns:
-                if len(numeric_columns) > 0:
-                    df = df.groupby(group_by)[numeric_columns[0]].sum().reset_index()
 
-            # ДАННИ
-            if len(numeric_columns) > 0:
-                values = df[numeric_columns[0]].fillna(0).tolist()
-            else:
-                values = []
+            #  ГРУПИРАНЕ
+            group_by = request.POST.get("group_by")
 
-            text_columns = df.select_dtypes(include=['object']).columns
-            if len(text_columns) > 0:
-                labels = df[text_columns[0]].fillna("").tolist()
-            else:
-                labels = [str(i) for i in range(len(values))]
+            if group_by == "month" and label_col and value_col:
+                df = df.groupby(label_col)[value_col].sum().reset_index()
+
+
+            if df.empty:
+                error_message = "Няма резултати"
+
+            if value_col:
+                values = df[value_col].fillna(0).tolist()
+
+            if label_col:
+                labels = df[label_col].fillna("").tolist()
 
             values = [float(v) for v in values]
 
-            # СТАТИСТИКИ
+
             if values:
+
                 total = sum(values)
                 average = round(total / len(values), 2)
 
                 max_index = values.index(max(values))
                 max_month = labels[max_index]
-                max_value = values[max_index]
+
+                max_value = max(values)
                 min_value = min(values)
                 variation = max_value - min_value
 
-                # ИСТОРИЯ (само ако има файл)
-                if file:
-                    Analysis.objects.create(
-                        user=request.user,
-                        filename=file.name,
-                        total=total,
-                        average=average
-                    )
-
-                plt.style.use('seaborn-v0_8')
-
-                # LINE
                 plt.figure(figsize=(7, 4))
-                plt.plot(values, marker='o', color='#4e73df')
+                plt.plot(values, marker='o')
                 plt.xticks(range(len(labels)), labels, rotation=45)
                 plt.title("Приходи")
-                plt.grid(alpha=0.3)
                 line_chart = plot_to_base64()
 
-                # PIE
-                colors = [
-                    "#4e73df","#1cc88a","#36b9cc","#f6c23e","#e74a3b",
-                    "#6f42c1","#17a2b8","#20c997","#6610f2","#fd7e14"
-                ]
-
                 plt.figure(figsize=(6, 6))
-                plt.pie(values, labels=labels, autopct='%1.1f%%', colors=colors)
+                plt.pie(values, labels=labels, autopct='%1.1f%%')
                 plt.title("Разпределение")
                 pie_chart = plot_to_base64()
 
-                # BAR
                 plt.figure(figsize=(7, 4))
-                plt.bar(labels, values, color="#1cc88a")
+                plt.bar(labels, values)
                 plt.xticks(rotation=45)
                 plt.title("Стълбовидна")
-                plt.grid(axis='y', alpha=0.3)
                 bar_chart = plot_to_base64()
 
-                # HISTOGRAM
                 plt.figure(figsize=(7, 4))
-                plt.hist(values, bins=6, color="#36b9cc")
+                plt.hist(values, bins=6)
                 plt.title("Хистограма")
-                plt.grid(alpha=0.3)
                 histogram_chart = plot_to_base64()
 
-            # ТАБЛИЦА
             data = df.to_html(
                 index=False,
                 classes="table table-bordered table-striped text-center w-100"
@@ -178,18 +166,20 @@ def index(request):
         "pie_chart": pie_chart,
         "bar_chart": bar_chart,
         "histogram_chart": histogram_chart,
+        "error_message": error_message,
     }
 
     return render(request, 'main/index.html', context)
 
+def about(request):
+    return render(request, "main/about.html")
 
 def about(request):
-    return render(request, 'main/about.html')
+    return render(request, "main/about.html")
 
-
-# LOGIN
 def user_login(request):
     error = None
+
 
     if request.method == "POST":
         username = request.POST.get("username")
@@ -199,16 +189,16 @@ def user_login(request):
 
         if user:
             login(request, user)
-            return redirect('index')
+            return redirect("index")
         else:
             error = "Грешно име или парола"
 
-    return render(request, 'main/login.html', {"error": error})
+    return render(request, "main/login.html", {"error": error})
 
 
-# REGISTER
 def register(request):
     error = None
+
 
     if request.method == "POST":
         username = request.POST.get("username")
@@ -227,18 +217,16 @@ def register(request):
         else:
             user = User.objects.create_user(username=username, password=password1)
             login(request, user)
-            return redirect('index')
+            return redirect("index")
 
-    return render(request, 'main/register.html', {"error": error})
+    return render(request, "main/register.html", {"error": error})
 
 
-# LOGOUT
 def user_logout(request):
     logout(request)
-    return redirect('index')
-
+    return redirect("index")
 
 @login_required
 def history(request):
-    analyses = Analysis.objects.filter(user=request.user).order_by('-created_at')
-    return render(request, 'main/history.html', {'analyses': analyses})
+    analyses = Analysis.objects.filter(user=request.user).order_by("-created_at")
+    return render(request, "main/history.html", {"analyses": analyses})

@@ -4,8 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13ac7e5a-f3c5-4d81-8cc0-3729d00c4fb6" name="Changes" comment="Чиста инсталация на Django">
+    <list default="true" id="13ac7e5a-f3c5-4d81-8cc0-3729d00c4fb6" name="Changes" comment="Готов">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DP/main/templates/main/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/DP/main/templates/main/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DP/main/templates/main/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/DP/main/templates/main/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DP/main/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/DP/main/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DP/main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/DP/main/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,7 +19,13 @@
   <component name="ChangesViewManager" show_ignored="true" />
   <component name="EmbeddingIndexingInfo">
     <option name="cachedIndexableFilesCount" value="5643" />
-    <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="PUSH_AUTO_UPDATE" value="true" />
@@ -29,13 +39,29 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/pgee-dzi2024/Theme_2607.git&quot;,
+    &quot;url&quot;: &quot;https://github.com/pgee-dzi2024/ThemePP_2607.git&quot;,
     &quot;accountId&quot;: &quot;8ab9eb59-2a39-4a26-a011-b063c0af754d&quot;
   }
 }</component>
   <component name="McpProjectServerCommands">
-    <commands />
-    <urls />
+    <McpServerCommand sourceId="UserConfigurationSource">
+      <option name="allowedToolsNames" />
+      <option name="enabled" value="true" />
+      <option name="name" value="" />
+      <option name="programPath" value="" />
+      <option name="arguments" value="" />
+      <option name="workingDirectory" value="" />
+      <envs />
+    </McpServerCommand>
+    <McpServerCommand sourceId="UserConfigurationSource">
+      <option name="allowedToolsNames" />
+      <option name="enabled" value="true" />
+      <option name="name" value="" />
+      <option name="programPath" value="" />
+      <option name="arguments" value="" />
+      <option name="workingDirectory" value="" />
+      <envs />
+    </McpServerCommand>
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
@@ -47,6 +73,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;Python.python -m pip install -r requirements.txt.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
@@ -59,13 +86,13 @@
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/DZI_2026/PP/Theme_07_Magi/downloads/DB&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/12A_2526/Theme_2607/ОПИТИ&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.intellij.python.django.customization.DjangoModulesConfigurable&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
     &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
@@ -84,11 +111,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\12A_2526\Theme_2607\ОПИТИ" />
       <recent name="D:\DZI_2026\PP\Theme_07_Magi\downloads\DB" />
       <recent name="D:\DZI_2026\PP\Theme_07_Magi\DP\main\static" />
       <recent name="D:\DZI_2026\PP\Theme_07_Magi\DP\main\templates\main" />
       <recent name="D:\DZI_2026\PP\Theme_07_Magi\DP\main" />
-      <recent name="D:\DZI_2026\PP\Theme_07_Magi\DP\DP" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\12A_2526\Theme_2607\DR" />
@@ -128,8 +155,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-PY-253.30387.173" />
-        <option value="bundled-python-sdk-4762d8aabb82-6d6dccd035ac-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-253.30387.173" />
+        <option value="bundled-python-sdk-0978a7220b69-9867c7d4c0a4-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-253.28294.336" />
       </set>
     </attachedChunks>
   </component>
@@ -303,17 +329,180 @@
       <option name="project" value="LOCAL" />
       <updated>1770686273579</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Чиста инсталация на Django">
+      <option name="closed" value="true" />
+      <created>1771230782224</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1771230782224</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Готова база данни">
+      <option name="closed" value="true" />
+      <created>1771326087269</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1771326087269</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Малки промени по дизайна">
+      <option name="closed" value="true" />
+      <created>1771404219367</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1771404219367</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Малки промени по дизайна">
+      <option name="closed" value="true" />
+      <created>1773045711781</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1773045711781</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Малки промени по дизайна">
+      <option name="closed" value="true" />
+      <created>1773142095173</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1773142095173</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Промени по дизайна">
+      <option name="closed" value="true" />
+      <created>1773394612169</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1773394612169</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Работещ бутон">
+      <option name="closed" value="true" />
+      <created>1773647394781</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1773647394781</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Работещ бутон">
+      <option name="closed" value="true" />
+      <created>1773649642181</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1773649642181</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Работещ бутон">
+      <option name="closed" value="true" />
+      <created>1773650183423</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1773650183423</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Работещ бутон">
+      <option name="closed" value="true" />
+      <created>1773740741131</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1773740741131</updated>
+    </task>
+    <task id="LOCAL-00030" summary="По-добра функционалност">
+      <option name="closed" value="true" />
+      <created>1773746866993</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1773746866993</updated>
+    </task>
+    <task id="LOCAL-00031" summary="По-добра функционалност">
+      <option name="closed" value="true" />
+      <created>1773824479528</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1773824479528</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Нова страница">
+      <option name="closed" value="true" />
+      <created>1773999156354</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1773999156354</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Нова страница">
+      <option name="closed" value="true" />
+      <created>1773999172350</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1773999172350</updated>
+    </task>
+    <task id="LOCAL-00034" summary="добавен matplotlib">
+      <option name="closed" value="true" />
+      <created>1774349432769</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1774349432769</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Готов">
+      <option name="closed" value="true" />
+      <created>1774430697339</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1774430697339</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Готов">
+      <option name="closed" value="true" />
+      <created>1774431321659</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1774431321659</updated>
+    </task>
+    <task id="LOCAL-00037" summary="Готов">
+      <option name="closed" value="true" />
+      <created>1774431329987</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1774431329987</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Създаден проект" />
     <MESSAGE value="шаблони" />
     <MESSAGE value="Чиста инсталация на Django" />
-    <option name="LAST_COMMIT_MESSAGE" value="Чиста инсталация на Django" />
+    <MESSAGE value="Готова база данни" />
+    <MESSAGE value="Малки промени по дизайна" />
+    <MESSAGE value="Промени по дизайна" />
+    <MESSAGE value="Работещ бутон" />
+    <MESSAGE value="По-добра функционалност" />
+    <MESSAGE value="Нова страница" />
+    <MESSAGE value="добавен matplotlib" />
+    <MESSAGE value="Готов" />
+    <option name="LAST_COMMIT_MESSAGE" value="Готов" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Theme_07_Magi$python__m_pip_install__r_requirements_txt.coverage" NAME="python -m pip install -r requirements.txt Coverage Results" MODIFIED="1770684594945" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
