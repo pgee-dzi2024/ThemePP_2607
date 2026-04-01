@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13ac7e5a-f3c5-4d81-8cc0-3729d00c4fb6" name="Changes" comment="Почти готов">
-      <change beforePath="$PROJECT_DIR$/DR/~$АН НА ТЕОРЕТИЧНАТА ЧАСТ.docx" beforeDir="false" afterPath="$PROJECT_DIR$/DR/~$АН НА ТЕОРЕТИЧНАТА ЧАСТ.docx" afterDir="false" />
-    </list>
+    <list default="true" id="13ac7e5a-f3c5-4d81-8cc0-3729d00c4fb6" name="Changes" comment="Добавена теория" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -493,7 +491,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775029633115</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="Добавена теория">
+      <option name="closed" value="true" />
+      <created>1775031503259</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1775031503259</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -523,7 +529,8 @@
     <MESSAGE value="добавен matplotlib" />
     <MESSAGE value="Готов" />
     <MESSAGE value="Почти готов" />
-    <option name="LAST_COMMIT_MESSAGE" value="Почти готов" />
+    <MESSAGE value="Добавена теория" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавена теория" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Theme_07_Magi$python__m_pip_install__r_requirements_txt.coverage" NAME="python -m pip install -r requirements.txt Coverage Results" MODIFIED="1770684594945" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
