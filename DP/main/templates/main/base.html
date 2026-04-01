@@ -1,7 +1,6 @@
 {% load static %}
 
 <!DOCTYPE html>
-
 <html lang="bg">
 
 <head>
@@ -9,138 +8,86 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}CSV Manager{% endblock %}</title>
 
-```
-<link rel="icon" href="{% static 'favicon.ico' %}">
-<link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
-```
+    <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
 
+    <style>
+        img { max-width: 100%; height: auto; }
+        .card { border-radius: 12px; }
+    </style>
 </head>
 
-<body id="page-top">
+<body>
 
 <div id="wrapper">
 
-<!-- SIDEBAR -->
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark">
 
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion">
-
-```
-<!-- LOGO -->
-<a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
-    <svg width="26" height="26" viewBox="0 0 24 24" style="margin-right:8px;">
-        <path fill="white" d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/>
-        <path fill="#e3e6f0" d="M15 2v5h5z"/>
-        <text x="6.5" y="16" font-size="6" fill="#4e73df" font-weight="bold">CSV</text>
-    </svg>
-    <div class="mx-2"><b>CSV Manager</b></div>
-</a>
-
-<hr class="sidebar-divider">
-
-<!-- DASHBOARD -->
-<li class="nav-item">
-    <a class="nav-link" href="/">
-        <span>Табло за управление</span>
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+        <div class="mx-2"><b>CSV Manager</b></div>
     </a>
-</li>
 
-<!-- ABOUT -->
-<li class="nav-item">
-    <a class="nav-link" href="{% url 'about' %}">
-        <span>Информация</span>
-    </a>
-</li>
-```
+    <hr class="sidebar-divider">
 
-{% if user.is_authenticated %}
+    <li class="nav-item">
+        <a class="nav-link" href="/">Табло за управление</a>
+    </li>
 
-```
-<!-- HISTORY -->
-<li class="nav-item">
-    <a class="nav-link" href="{% url 'history' %}">
-        <span>История на анализите</span>
-    </a>
-</li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'about' %}">Информация</a>
+    </li>
 
-<!-- LOGOUT -->
-<li class="nav-item">
-    <a class="nav-link" href="{% url 'logout' %}">
-        <span>Изход</span>
-    </a>
-</li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'history' %}">История</a>
+    </li>
 
-<hr class="sidebar-divider">
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout' %}">Изход</a>
+    </li>
 
-<!-- ✅ ФИЛТРИ (ОПРАВЕНИ) -->
-<li class="nav-item px-3">
+    <hr class="sidebar-divider">
 
-    <form method="POST" action="{% url 'index' %}">
-        {% csrf_token %}
+    <!-- ФИЛТРИ -->
+    <li class="nav-item px-3">
 
-        <!-- FILTER -->
-        <select name="min_filter" class="form-control mb-2">
-            <option value="">Филтър</option>
-            <option value="50">≥ 50</option>
-            <option value="100">≥ 100</option>
-            <option value="500">≥ 500</option>
+        <label class="text-white small">Филтър</label>
+        <select id="filter" class="form-control mb-2">
+            <option value="">Без филтър</option>
+            <option value="≥ 50">≥ 50</option>
+            <option value="≥ 100">≥ 100</option>
+            <option value="≥ 500">≥ 500</option>
         </select>
 
-        <!-- GROUP -->
-        <select name="group_by" class="form-control mb-2">
-            <option value="">Групиране</option>
+        <label class="text-white small">Групиране</label>
+        <select id="group" class="form-control mb-3">
+            <option value="">Без групиране</option>
             <option value="month">По месец</option>
         </select>
 
-        <button type="submit" class="btn btn-success btn-sm w-100">
+        <button onclick="applyFilters()" class="btn btn-success w-100">
             Приложи
         </button>
 
-    </form>
-
-</li>
-```
-
-{% else %}
-
-```
-<!-- LOGIN -->
-<li class="nav-item">
-    <a class="nav-link" href="{% url 'login' %}">
-        <span>Вход</span>
-    </a>
-</li>
-
-<!-- REGISTER -->
-<li class="nav-item">
-    <a class="nav-link" href="{% url 'register' %}">
-        <span>Регистрация</span>
-    </a>
-</li>
-```
-
-{% endif %}
+    </li>
 
 </ul>
 
-<!-- CONTENT -->
-
 <div id="content-wrapper" class="d-flex flex-column">
-<div id="content">
-
-<nav class="navbar navbar-light bg-white shadow mb-4"></nav>
-
-<div class="container-fluid">
-{% block content %}
-{% endblock %}
+    <div id="content">
+        <div class="container-fluid">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
 </div>
 
 </div>
-</div>
-</div>
 
-<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-
-<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script>
+function applyFilters() {
+    document.getElementById("hiddenFilter").value = document.getElementById("filter").value;
+    document.getElementById("hiddenGroup").value = document.getElementById("group").value;
+    document.getElementById("mainForm").submit();
+}
+</script>
 
 </body>
 </html>

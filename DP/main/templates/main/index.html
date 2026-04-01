@@ -1,172 +1,141 @@
-from .models import Analysis
-from django.contrib.auth.decorators import login_required
-import pandas as pd
-from django.shortcuts import render
+{% extends "main/base.html" %}
 
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
+{% block content %}
 
-import matplotlib
-matplotlib.use('Agg')
+<div class="container-fluid">
 
-import matplotlib.pyplot as plt
-import io
-import base64
+    <!-- HEADER -->
+    <div class="row align-items-center mb-4">
 
+        <div class="col-md-4">
+            <h3 class="fw-semibold">Панел за управление</h3>
+        </div>
 
-def plot_to_base64():
-    buffer = io.BytesIO()
-    plt.tight_layout()
-    plt.savefig(buffer, format='png')
-    buffer.seek(0)
-    image = base64.b64encode(buffer.getvalue()).decode()
-    buffer.close()
-    plt.close()
-    return image
+        <div class="col-md-4 text-center">
+            <span class="text-muted">Здравейте, {{ user.username }}</span>
+        </div>
 
+        <div class="col-md-4 d-flex justify-content-end">
 
-@login_required
-def index(request):
+            <!-- 🔥 ЕДИНСТВЕНА ФОРМА -->
+            <form id="mainForm" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
 
-    labels = []
-    values = []
-    data = ""
+                <!-- скрити полета (идват от sidebar) -->
+                <input type="hidden" name="min_filter" id="hiddenFilter">
+                <input type="hidden" name="group_by" id="hiddenGroup">
 
-    max_month = ""
-    max_value = 0
-    min_value = 0
-    variation = 0
-    total = 0
-    average = 0
+                <!-- файл -->
+                <input type="file" name="datafile" id="fileInput" hidden onchange="this.form.submit()">
 
-    uploaded_file_name = None
+                <button type="button" class="btn btn-primary px-4"
+                        onclick="showLoader(); document.getElementById('fileInput').click()">
+                    Качи файл
+                </button>
+            </form>
 
-    line_chart = None
-    pie_chart = None
-    bar_chart = None
-    histogram_chart = None
+        </div>
 
-    df = None
-    error_message = None
+    </div>
 
-    if request.method == "POST":
+    <!-- LOADER -->
+    <div id="loader" style="display:none; text-align:center; margin-bottom:20px;">
+        <div class="spinner-border text-primary"></div>
+        <p class="mt-2 text-muted">Зареждане...</p>
+    </div>
 
-        file = request.FILES.get("datafile")
+    <!-- ERROR -->
+    {% if error_message %}
+    <div class="alert alert-warning text-center">
+        {{ error_message }}
+    </div>
+    {% endif %}
 
-        # 📌 КАЧВАНЕ
-        if file:
-            uploaded_file_name = file.name
+    <!-- СТАТИСТИКА -->
+    {% if values %}
+    <div class="row mb-4 g-3">
 
-            if file.name.endswith(".csv"):
-                df = pd.read_csv(file)
-            elif file.name.endswith(".xlsx"):
-                df = pd.read_excel(file)
+        <div class="col-md-3">
+            <div class="card shadow-sm p-3 text-center">
+                <small class="text-muted">Вариация</small>
+                <h5>{{ variation }}</h5>
+            </div>
+        </div>
 
-            request.session['data'] = df.to_json()
-            request.session['filename'] = file.name
+        <div class="col-md-3">
+            <div class="card shadow-sm p-3 text-center">
+                <small class="text-muted">Средно</small>
+                <h5>{{ average }}</h5>
+            </div>
+        </div>
 
-        else:
-            data_json = request.session.get('data')
+        <div class="col-md-3">
+            <div class="card shadow-sm p-3 text-center">
+                <small class="text-muted">Общо</small>
+                <h5>{{ total }}</h5>
+            </div>
+        </div>
 
-            if data_json:
-                df = pd.read_json(data_json)
-                uploaded_file_name = request.session.get('filename')
+        <div class="col-md-3">
+            <div class="card shadow-sm p-3 text-center">
+                <small class="text-muted">Най-силен месец</small>
+                <h5>{{ max_month }}</h5>
+            </div>
+        </div>
 
-        # ======================
-        if df is not None:
+    </div>
+    {% endif %}
 
-            numeric_columns = df.select_dtypes(include=['number']).columns
-            text_columns = df.select_dtypes(include=['object']).columns
+    <!-- ГРАФИКИ -->
+    {% if values %}
+    <div class="row g-4">
 
-            label_col = text_columns[0] if len(text_columns) > 0 else None
-            value_col = numeric_columns[0] if len(numeric_columns) > 0 else None
+        <div class="col-md-6">
+            <div class="card shadow-sm p-3 text-center">
+                <h6 class="text-muted">Линейна графика</h6>
+                <img src="data:image/png;base64,{{ line_chart }}" class="img-fluid">
+            </div>
+        </div>
 
-            # ======================
-            # ✅ ФИЛТЪР (фикс)
-            min_filter = request.POST.get("min_filter")
+        <div class="col-md-6">
+            <div class="card shadow-sm p-3 text-center">
+                <h6 class="text-muted">Кръгова диаграма</h6>
+                <img src="data:image/png;base64,{{ pie_chart }}"
+     style="max-height: 500px; width: auto; display: block; margin: 0 auto;">
+            </div>
+        </div>
 
-            if min_filter and value_col:
-                try:
-                    number = int(min_filter.replace("≥", "").strip())
-                    df = df[df[value_col] >= number]
-                except:
-                    pass
+        <div class="col-md-6">
+            <div class="card shadow-sm p-3 text-center">
+                <h6 class="text-muted">Стълбовидна диаграма</h6>
+                <img src="data:image/png;base64,{{ bar_chart }}" class="img-fluid">
+            </div>
+        </div>
 
-            # ======================
-            # ✅ ГРУПИРАНЕ (фикс)
-            group_by = request.POST.get("group_by")
+        <div class="col-md-6">
+            <div class="card shadow-sm p-3 text-center">
+                <h6 class="text-muted">Хистограма</h6>
+                <img src="data:image/png;base64,{{ histogram_chart }}" class="img-fluid">
+            </div>
+        </div>
 
-            if group_by == "month" and label_col and value_col:
-                df = df.groupby(label_col)[value_col].sum().reset_index()
+    </div>
+    {% endif %}
 
-            # ======================
-            if df.empty:
-                error_message = "Няма резултати"
+    <!-- ТАБЛИЦА -->
+    {% if data %}
+    <div class="card shadow-sm p-3 mt-4">
+        {{ data|safe }}
+    </div>
+    {% endif %}
 
-            if value_col:
-                values = df[value_col].fillna(0).tolist()
+</div>
 
-            if label_col:
-                labels = df[label_col].fillna("").tolist()
+<!-- JS -->
+<script>
+function showLoader() {
+    document.getElementById("loader").style.display = "block";
+}
+</script>
 
-            values = [float(v) for v in values]
-
-            # ======================
-            if values:
-
-                total = sum(values)
-                average = round(total / len(values), 2)
-
-                max_index = values.index(max(values))
-                max_month = labels[max_index]
-
-                max_value = max(values)
-                min_value = min(values)
-                variation = max_value - min_value
-
-                plt.figure(figsize=(7, 4))
-                plt.plot(values, marker='o')
-                plt.xticks(range(len(labels)), labels, rotation=45)
-                plt.title("Приходи")
-                line_chart = plot_to_base64()
-
-                plt.figure(figsize=(6, 6))
-                plt.pie(values, labels=labels, autopct='%1.1f%%')
-                plt.title("Разпределение")
-                pie_chart = plot_to_base64()
-
-                plt.figure(figsize=(7, 4))
-                plt.bar(labels, values)
-                plt.xticks(rotation=45)
-                plt.title("Стълбовидна")
-                bar_chart = plot_to_base64()
-
-                plt.figure(figsize=(7, 4))
-                plt.hist(values, bins=6)
-                plt.title("Хистограма")
-                histogram_chart = plot_to_base64()
-
-            data = df.to_html(
-                index=False,
-                classes="table table-bordered table-striped text-center w-100"
-            )
-
-    context = {
-        "labels": labels,
-        "values": values,
-        "data": data,
-        "max_month": max_month,
-        "max_value": max_value,
-        "min_value": min_value,
-        "variation": variation,
-        "total": total,
-        "average": average,
-        "uploaded_file_name": uploaded_file_name,
-        "line_chart": line_chart,
-        "pie_chart": pie_chart,
-        "bar_chart": bar_chart,
-        "histogram_chart": histogram_chart,
-        "error_message": error_message,
-    }
-
-    return render(request, 'main/index.html', context)
+{% endblock %}
