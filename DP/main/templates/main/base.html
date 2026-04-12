@@ -1,6 +1,5 @@
-{% load static %}
-
 <!DOCTYPE html>
+{% load static %}
 <html lang="bg">
 
 <head>
@@ -74,6 +73,15 @@
 <div id="content-wrapper" class="d-flex flex-column">
     <div id="content">
         <div class="container-fluid">
+            {% if messages %}
+                <div class="mt-3">
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags|default:'info' }} text-center">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
             {% block content %}{% endblock %}
         </div>
     </div>
@@ -83,9 +91,19 @@
 
 <script>
 function applyFilters() {
-    document.getElementById("hiddenFilter").value = document.getElementById("filter").value;
-    document.getElementById("hiddenGroup").value = document.getElementById("group").value;
-    document.getElementById("mainForm").submit();
+    const form = document.getElementById("mainForm");
+    const hiddenFilter = document.getElementById("hiddenFilter");
+    const hiddenGroup = document.getElementById("hiddenGroup");
+    const filter = document.getElementById("filter");
+    const group = document.getElementById("group");
+
+    if (!form || !hiddenFilter || !hiddenGroup) {
+        return;
+    }
+
+    hiddenFilter.value = filter ? filter.value : "";
+    hiddenGroup.value = group ? group.value : "";
+    form.submit();
 }
 </script>
 

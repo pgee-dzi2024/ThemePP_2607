@@ -3,55 +3,152 @@
 {% block content %}
 
 <div class="container-fluid">
-
-    <!-- HEADER -->
     <div class="row align-items-center mb-4">
-
         <div class="col-md-4">
             <h3 class="fw-semibold">Панел за управление</h3>
         </div>
-
         <div class="col-md-4 text-center">
             <span class="text-muted">Здравейте, {{ user.username }}</span>
         </div>
-
         <div class="col-md-4 d-flex justify-content-end">
-
             <!-- 🔥 ЕДИНСТВЕНА ФОРМА -->
             <form id="mainForm" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-
                 <!-- скрити полета (идват от sidebar) -->
                 <input type="hidden" name="min_filter" id="hiddenFilter">
                 <input type="hidden" name="group_by" id="hiddenGroup">
-
                 <!-- файл -->
                 <input type="file" name="datafile" id="fileInput" hidden onchange="this.form.submit()">
-
                 <button type="button" class="btn btn-primary px-4"
                         onclick="showLoader(); document.getElementById('fileInput').click()">
                     Качи файл
                 </button>
             </form>
-
         </div>
-
     </div>
 
-    <!-- LOADER -->
+    <div class="mb-3 d-flex justify-content-end">
+        <a href="{% url 'clear_analysis_session' %}" class="btn btn-outline-secondary mr-2">
+            Нов анализ
+        </a>
+        {% if download_ready %}
+        <a href="{% url 'download_csv' %}" class="btn btn-outline-success">
+            Изтегли резултата (CSV)
+        </a>
+        {% endif %}
+    </div>
+
+    <!-- ... existing code ... -->
+
+    {% if numeric_columns or text_columns %}
+    <div class="card shadow-sm p-3 mb-4">
+        <h6 class="mb-3 text-muted">Настройки за визуализация</h6>
+        <div class="row g-3 align-items-end">
+            <div class="col-md-4">
+                <label class="form-label">Колона за етикети (X)</label>
+                <select form="mainForm" name="label_col" class="form-control">
+                    {% for col in text_columns %}
+                    <option value="{{ col }}" {% if selected_label_col == col %}selected{% endif %}>{{ col }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Колона за стойности (Y)</label>
+                <select form="mainForm" name="value_col" class="form-control" required>
+                    {% for col in numeric_columns %}
+                    <option value="{{ col }}" {% if selected_value_col == col %}selected{% endif %}>{{ col }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Дата колона (за „По месец“)</label>
+                <select form="mainForm" name="date_col" class="form-control">
+                    <option value="">Автоматично</option>
+                    {% for col in date_columns %}
+                    <option value="{{ col }}" {% if selected_date_col == col %}selected{% endif %}>{{ col }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <label class="form-label">Агрегиране</label>
+                <select form="mainForm" name="agg_func" class="form-control">
+                    <option value="sum" {% if selected_agg == "sum" %} selected {% endif %}>Сума</option>
+                    <option value="mean" {% if selected_agg == "mean" %} selected {% endif %}>Средно</option>
+                </select>
+            </div>
+
+            <div class="col-md-12">
+                <button form="mainForm" type="submit" class="btn btn-success w-100">Обнови анализ</button>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
     <div id="loader" style="display:none; text-align:center; margin-bottom:20px;">
         <div class="spinner-border text-primary"></div>
         <p class="mt-2 text-muted">Зареждане...</p>
     </div>
 
-    <!-- ERROR -->
     {% if error_message %}
     <div class="alert alert-warning text-center">
         {{ error_message }}
     </div>
     {% endif %}
 
-    <!-- СТАТИСТИКА -->
+    {% if rows_count %}
+    <div class="card shadow-sm p-3 mb-4">
+        <h6 class="text-muted">Информация за данните</h6>
+        <div class="row mb-3">
+            <div class="col-md-3"><b>Редове:</b> {{ rows_count }}</div>
+            <div class="col-md-3"><b>Колони:</b> {{ cols_count }}</div>
+            <div class="col-md-6"><b>Файл:</b> {{ uploaded_file_name }}</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <h6 class="text-muted">Типове на колоните</h6>
+                <table class="table table-sm table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Колона</th>
+                            <th>Тип</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for col, dtype in dtypes_info.items %}
+                        <tr>
+                            <td>{{ col }}</td>
+                            <td>{{ dtype }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-md-6">
+                <h6 class="text-muted">Липсващи стойности</h6>
+                <table class="table table-sm table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Колона</th>
+                            <th>Липсващи</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for col, miss in missing_info.items %}
+                        <tr>
+                            <td>{{ col }}</td>
+                            <td>{{ miss }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
     {% if values %}
     <div class="row mb-4 g-3">
 
@@ -78,7 +175,7 @@
 
         <div class="col-md-3">
             <div class="card shadow-sm p-3 text-center">
-                <small class="text-muted">Най-силен месец</small>
+                <small class="text-muted">Най-силна категория</small>
                 <h5>{{ max_month }}</h5>
             </div>
         </div>
@@ -86,14 +183,13 @@
     </div>
     {% endif %}
 
-    <!-- ГРАФИКИ -->
     {% if values %}
     <div class="row g-4">
 
         <div class="col-md-6">
             <div class="card shadow-sm p-3 text-center">
                 <h6 class="text-muted">Линейна графика</h6>
-                <img src="data:image/png;base64,{{ line_chart }}" class="img-fluid">
+                <img src="data:image/png;base64,{{ line_chart }}" class="img-fluid" alt="">
             </div>
         </div>
 
@@ -101,28 +197,27 @@
             <div class="card shadow-sm p-3 text-center">
                 <h6 class="text-muted">Кръгова диаграма</h6>
                 <img src="data:image/png;base64,{{ pie_chart }}"
-     style="max-height: 500px; width: auto; display: block; margin: 0 auto;">
+                     style="max-height: 500px; width: auto; display: block; margin: 0 auto;" alt="">
             </div>
         </div>
 
         <div class="col-md-6">
             <div class="card shadow-sm p-3 text-center">
                 <h6 class="text-muted">Стълбовидна диаграма</h6>
-                <img src="data:image/png;base64,{{ bar_chart }}" class="img-fluid">
+                <img src="data:image/png;base64,{{ bar_chart }}" class="img-fluid" alt="">
             </div>
         </div>
 
         <div class="col-md-6">
             <div class="card shadow-sm p-3 text-center">
                 <h6 class="text-muted">Хистограма</h6>
-                <img src="data:image/png;base64,{{ histogram_chart }}" class="img-fluid">
+                <img src="data:image/png;base64,{{ histogram_chart }}" class="img-fluid" alt="">
             </div>
         </div>
 
     </div>
     {% endif %}
 
-    <!-- ТАБЛИЦА -->
     {% if data %}
     <div class="card shadow-sm p-3 mt-4">
         {{ data|safe }}
@@ -131,7 +226,6 @@
 
 </div>
 
-<!-- JS -->
 <script>
 function showLoader() {
     document.getElementById("loader").style.display = "block";

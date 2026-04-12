@@ -1,3 +1,10 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Analysis
+
+
+@admin.register(Analysis)
+class AnalysisAdmin(admin.ModelAdmin):
+    list_display = ("id", "user", "filename", "total", "average", "created_at")
+    list_filter = ("created_at", "user")
+    search_fields = ("filename", "user__username")
