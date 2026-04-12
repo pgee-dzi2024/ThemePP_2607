@@ -16,6 +16,8 @@ import io
 import base64
 import os
 import uuid
+import warnings
+import re
 
 
 # ======================
@@ -30,6 +32,25 @@ def plot_to_base64():
     buffer.close()
     plt.close()
     return image
+
+
+def _is_likely_date_column(series: pd.Series, col_name: str) -> bool:
+    name = (col_name or "").lower()
+    if any(k in name for k in ["date", "дата", "day", "month", "год", "time"]):
+        return True
+
+    if pd.api.types.is_datetime64_any_dtype(series):
+        return True
+
+    if series.dtype != "object":
+        return False
+
+    sample = series.dropna().astype(str).head(20)
+    if sample.empty:
+        return False
+
+    date_like = sample.str.contains(r"^\d{1,4}[-/.]\d{1,2}[-/.]\d{1,4}$", regex=True).mean()
+    return date_like >= 0.5
 
 
 # ======================
@@ -125,7 +146,14 @@ def index(request):
 
                 # Потенциални дата-колони
                 for col in df.columns:
-                    parsed = pd.to_datetime(df[col], errors="coerce", dayfirst=True)
+                    series = df[col]
+                    if not _is_likely_date_column(series, col):
+                        continue
+
+                    with warnings.catch_warnings():
+                        warnings.simplefilter("ignore", UserWarning)
+                        parsed = pd.to_datetime(series, errors="coerce", dayfirst=True)
+
                     if parsed.notna().sum() > 0:
                         date_columns.append(col)
 

@@ -3,136 +3,82 @@
 {% block title %}Информация{% endblock %}
 
 {% block content %}
-
 <div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
 
-<div class="row">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h4 class="m-0 font-weight-bold text-primary">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        Информация за проекта
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <p>
+                        <b>Интерактивен дашборд за анализ на данни</b> е уеб приложение, което позволява
+                        качване на таблични файлове и автоматично генериране на графики и статистики.
+                        Проектът е разработен като практическа част на дипломна работа.
+                    </p>
 
-    <div class="col-lg-10 mx-auto">
+                    <hr>
 
-        <!-- ОСНОВНА КАРТА -->
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h4 class="m-0 font-weight-bold text-primary">
-                    <i class="fas fa-info-circle mr-2"></i>
-                    Информация
-                </h4>
-            </div>
+                    <h5 class="font-weight-bold">Основни функционалности</h5>
+                    <ul class="mt-3">
+                        <li>📂 Качване на файлове: <b>.csv</b> и <b>.xlsx</b></li>
+                        <li>✅ Валидация на данните и съобщения при грешки</li>
+                        <li>📋 Преглед на данните: брой редове/колони, типове, липсващи стойности</li>
+                        <li>🎛️ Избор на колони за визуализация (X и Y)</li>
+                        <li>🗓️ Избор на дата колона за групиране по месец</li>
+                        <li>🧮 Агрегиране при групиране: <b>сума</b> или <b>средно</b></li>
+                        <li>🔎 Филтриране по минимална стойност</li>
+                        <li>📈 Графики: линейна, стълбовидна, кръгова (+ хистограма)</li>
+                        <li>📜 История на анализите за всеки потребител</li>
+                        <li>⬇️ Експорт на обработените резултати в CSV</li>
+                        <li>🧹 Бутон „Нов анализ“ за изчистване на текущата сесия</li>
+                    </ul>
 
-            <div class="card-body">
+                    <hr>
 
-                <p>
-                    <b>CSV Manager</b> е модерно уеб приложение, предназначено за бърз и ефективен анализ,
-                    обработка и визуализация на данни от CSV и Excel файлове. То позволява на потребителите
-                    лесно да качват файлове и автоматично да получават структурирана информация,
-                    статистики и интерактивни графики.
-                </p>
+                    <h5 class="font-weight-bold">Как се използва</h5>
+                    <ol class="mt-3">
+                        <li>Качете CSV/XLSX файл от бутона „Качи файл“.</li>
+                        <li>Изберете колони, филтър, групиране и агрегиране.</li>
+                        <li>Прегледайте графиките и изтеглете резултата в CSV.</li>
+                    </ol>
 
-                <p>
-                    Приложението използва мощни библиотеки като <b>Pandas</b> за обработка на данни
-                    и <b>Chart.js</b> за визуализация, което го прави подходящо както за начинаещи,
-                    така и за напреднали потребители.
-                </p>
+                    <hr>
 
-                <ul class="mt-3">
-                    <li>📂 <b>Качване на файлове</b> – поддръжка на CSV и Excel формати с автоматично извличане на данни</li>
-                    <li>📊 <b>Визуализация с графики</b> – линейни, кръгови и стълбовидни диаграми за по-добро разбиране</li>
-                    <li>📈 <b>Анализ на данни</b> – автоматично изчисляване на средно, максимум, минимум и вариация</li>
-                    <li>📋 <b>Табличен преглед</b> – ясно структурирано представяне на данните в табличен вид</li>
-                    <li>⚡ <b>Автоматична обработка</b> – интелигентно разпознаване на числови и текстови колони</li>
-                    <li>🎯 <b>Dashboard</b> – визуално табло с ключови метрики и статистики</li>
-                </ul>
-
-                <hr>
-
-                <p class="text-muted">
-                    Основната цел на CSV Manager е да улесни работата с данни,
-                    като предоставя интуитивен интерфейс и мощни инструменти за анализ,
-                    без необходимост от задълбочени технически познания.
-                </p>
-
-
-            </div>
-        </div>
-
-        <!-- ГРАФИКИ -->
-        <div class="row">
-
-            <div class="col-md-6">
-                <div class="card shadow mb-4">
-                    <div class="card-header">Линейна графика</div>
-                    <div class="card-body text-center">
-                        <img src="https://quickchart.io/chart?c={type:'line',data:{labels:['Януари','Февруари','Март'],datasets:[{label:'Data',data:[10,20,15]}]}}" class="img-fluid">
+                    <h5 class="font-weight-bold">Използвани технологии</h5>
+                    <div class="row text-center mt-3">
+                        <div class="col-md-3 mb-3">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" width="56" alt="Django">
+                            <p class="mt-2 mb-0">Django</p>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="56" alt="Python">
+                            <p class="mt-2 mb-0">Python / Pandas</p>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <img src="https://matplotlib.org/_static/images/documentation.svg" width="56" alt="Matplotlib">
+                            <p class="mt-2 mb-0">Matplotlib</p>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" width="56" alt="Bootstrap">
+                            <p class="mt-2 mb-0">Bootstrap</p>
+                        </div>
                     </div>
+
+                    <p class="text-muted mt-3 mb-0">
+                        Целта на проекта е да улесни анализа на реални данни чрез
+                        ясна визуализация и бърз експорт на резултатите
+                        като предоставя интуитивен интерфейс и мощни инструменти за анализ,
+                        без необходимост от задълбочени технически познания.
+                </p>
                 </div>
             </div>
 
-            <div class="col-md-6">
-                <div class="card shadow mb-4">
-                    <div class="card-header">Кръгова диаграма</div>
-                    <div class="card-body text-center">
-                        <img src="https://quickchart.io/chart?c={type:'doughnut',data:{labels:['A','B','C'],datasets:[{data:[30,50,20]}]}}" class="img-fluid">
-                    </div>
-                </div>
-            </div>
-
         </div>
-
-        <!-- ТЕХНОЛОГИИ -->
-        <div class="card shadow mb-4">
-            <div class="card-header">
-                <h5 class="font-weight-bold">Използвани технологии</h5>
-            </div>
-
-            <div class="card-body text-center">
-
-                <div class="row">
-
-                    <div class="col-md-3">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" width="60">
-                        <p>Django</p>
-                    </div>
-
-                    <div class="col-md-3">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="60">
-                        <p>Pandas</p>
-                    </div>
-
-                    <div class="col-md-3">
-                        <img src="https://www.chartjs.org/img/chartjs-logo.svg" width="60">
-                        <p>Chart.js</p>
-                    </div>
-
-                    <div class="col-md-3">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" width="60">
-                        <p>Bootstrap</p>
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-
-        <!-- BONUS СЕКЦИЯ -->
-        <div class="card shadow mb-4">
-            <div class="card-body text-center">
-
-                <h5>Какво ще научите?</h5>
-
-                <ul class="text-left d-inline-block mt-3">
-                    <li>📊 Работа с реални данни</li>
-                    <li>🐍 Pandas анализ</li>
-                    <li>📈 Визуализация с Chart.js</li>
-                    <li>🌐 Django уеб разработка</li>
-                </ul>
-
-            </div>
-        </div>
-
     </div>
-
 </div>
-
-</div>
-
 {% endblock %}

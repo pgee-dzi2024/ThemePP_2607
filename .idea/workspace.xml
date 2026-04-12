@@ -4,25 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13ac7e5a-f3c5-4d81-8cc0-3729d00c4fb6" name="Changes" comment="Добавена теория">
-      <change afterPath="$PROJECT_DIR$/work/DR/img_tests.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/work/DR/ПЛАН НА ТЕОРЕТИЧНАТА ЧАСТ.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="13ac7e5a-f3c5-4d81-8cc0-3729d00c4fb6" name="Changes" comment="корекции 1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ДЗИ_2026.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ДЗИ_2026.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DP/DP/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/DP/DP/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DP/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/work/DR/задание.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DP/main/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/DP/main/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DP/main/templates/main/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/DP/main/templates/main/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DP/main/templates/main/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/DP/main/templates/main/about.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DP/main/templates/main/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/DP/main/templates/main/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DP/main/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/DP/main/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DP/main/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/DP/main/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DP/main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/DP/main/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DR/Задание тема 07.docx" beforeDir="false" afterPath="$PROJECT_DIR$/work/DR/Задание тема 07.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DR/История.docx" beforeDir="false" afterPath="$PROJECT_DIR$/work/DR/История.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DR/ПЛАН НА ТЕОРЕТИЧНАТА ЧАСТ.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/work/Титулна страница.docx" beforeDir="false" afterPath="$PROJECT_DIR$/DR/Титулна страница.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DR/Тема_07_ПП.docx" beforeDir="false" afterPath="$PROJECT_DIR$/DR/Тема_07_ПП.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/work/DR/~$дание тема 07.docx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -549,7 +537,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775031594260</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="корекции 1">
+      <option name="closed" value="true" />
+      <created>1775993763252</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1775993763252</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -580,7 +576,8 @@
     <MESSAGE value="Готов" />
     <MESSAGE value="Почти готов" />
     <MESSAGE value="Добавена теория" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавена теория" />
+    <MESSAGE value="корекции 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="корекции 1" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Theme_07_Magi$python__m_pip_install__r_requirements_txt.coverage" NAME="python -m pip install -r requirements.txt Coverage Results" MODIFIED="1775951353587" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
