@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="13ac7e5a-f3c5-4d81-8cc0-3729d00c4fb6" name="Changes" comment="Резюме, защита">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DR/Защита.pptx" beforeDir="false" afterPath="$PROJECT_DIR$/DR/Защита.pptx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DP/main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/DP/main/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DR/Практика_задания_ПП_07.docx" beforeDir="false" afterPath="$PROJECT_DIR$/DR/Практика_задания_ПП_07.docx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,22 +174,6 @@
       <workItem from="1767942479836" duration="844000" />
       <workItem from="1768817136650" duration="7000" />
       <workItem from="1770684206093" duration="2917000" />
-    </task>
-    <task id="LOCAL-00004" summary="Създаден проект">
-      <option name="closed" value="true" />
-      <created>1768890755504</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1768890755504</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Създаден проект">
-      <option name="closed" value="true" />
-      <created>1768894725824</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1768894725824</updated>
     </task>
     <task id="LOCAL-00006" summary="Създаден проект">
       <option name="closed" value="true" />
@@ -566,7 +551,23 @@
       <option name="project" value="LOCAL" />
       <updated>1778225882105</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="Резюме, защита">
+      <option name="closed" value="true" />
+      <created>1778570221598</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1778570221598</updated>
+    </task>
+    <task id="LOCAL-00054" summary="Резюме, защита">
+      <option name="closed" value="true" />
+      <created>1778573829246</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1778573829246</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

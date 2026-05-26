@@ -21,7 +21,7 @@ import re
 
 
 # ======================
-# 📊 ГРАФИКА → BASE64
+#  ГРАФИКА → BASE64
 # ======================
 def plot_to_base64():
     buffer = io.BytesIO()
@@ -54,7 +54,7 @@ def _is_likely_date_column(series: pd.Series, col_name: str) -> bool:
 
 
 # ======================
-# 🏠 MAIN PAGE
+#  MAIN PAGE
 # ======================
 @login_required
 def index(request):
@@ -184,7 +184,7 @@ def index(request):
             label_col = selected_label_col
             value_col = selected_value_col
 
-            # ✅ ФИЛТЪР
+            #  ФИЛТЪР
             min_filter = request.POST.get("min_filter")
             if min_filter and value_col:
                 try:
@@ -194,7 +194,7 @@ def index(request):
                 except Exception:
                     error_message = "Невалиден филтър"
 
-            # ✅ ГРУПИРАНЕ
+            # ГРУПИРАНЕ
             group_by = request.POST.get("group_by")
             if group_by == "month" and not error_message:
                 date_column = selected_date_col if selected_date_col else None
@@ -259,7 +259,7 @@ def index(request):
                 plt.figure(figsize=(6, 3))
                 plt.plot(values, marker="o", color="#4f46e5")
                 plt.xticks(range(len(labels)), labels, rotation=30)
-                line_chart = plot_to_base64()
+                line_chart = plot_to_base64() #Графиките се конвертират в изображения (Base64), за да могат да се покажат в HTML страницата.
 
                 # PIE
                 plt.figure(figsize=(7, 7))
@@ -300,7 +300,7 @@ def index(request):
                 request.session["last_export_csv_path"] = str(export_path)
                 download_ready = True
 
-    context = {
+    context = {    #речник views.py-index.html
         "labels": labels,
         "values": values,
         "data": data,
@@ -334,7 +334,7 @@ def index(request):
 
 
 # ======================
-# 🔐 LOGIN
+#  LOGIN
 # ======================
 def user_login(request):
     if request.method == "POST":
@@ -356,7 +356,7 @@ def user_login(request):
 
 
 # ======================
-# 📝 REGISTER
+#  REGISTER
 # ======================
 def register(request):
     if request.method == "POST":
@@ -383,7 +383,7 @@ def register(request):
 
 
 # ======================
-# 🚪 LOGOUT
+#  LOGOUT
 # ======================
 def user_logout(request):
     logout(request)
@@ -391,7 +391,7 @@ def user_logout(request):
 
 
 # ======================
-# 📜 HISTORY
+#  HISTORY
 # ======================
 @login_required
 def history(request):
@@ -400,7 +400,7 @@ def history(request):
 
 
 # ======================
-# ⬇️ CSV DOWNLOAD
+# ⬇ CSV DOWNLOAD
 # ======================
 @login_required
 def download_csv(request):
@@ -419,7 +419,7 @@ def download_csv(request):
 
 
 # ======================
-# 🧹 CLEAR CURRENT ANALYSIS SESSION
+#  CLEAR CURRENT ANALYSIS SESSION
 # ======================
 @login_required
 def clear_analysis_session(request):
